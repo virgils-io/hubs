@@ -283,7 +283,7 @@ export class CharacterControllerSystem {
         const triedToMove = this.relativeMotion.lengthSq() > 0.000001;
 
         if (triedToMove) {
-          const speedModifier = preferences.movementSpeedModifier || 1;
+          const speedModifier = preferences.movementSpeedModifier || 0.2;
           calculateDisplacementToDesiredPOV(
             snapRotatedPOV,
             this.fly || !navMeshExists,
