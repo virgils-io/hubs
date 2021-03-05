@@ -540,10 +540,10 @@ const DEFINITIONS = new Map([
         key: "movementSpeedModifier",
         prefType: PREFERENCE_LIST_ITEM_TYPE.NUMBER_WITH_RANGE,
         min: 0,
-        max: 2,
+        max: 0.3,
         step: 0.1,
         digits: 1,
-        defaultNumber: 1
+        defaultNumber: 0.2
       }
     ]
   ],

@@ -128,8 +128,14 @@ AFRAME.registerComponent("player-info", {
   applyDisplayName() {
     const store = window.APP.store;
 
-    const infoShouldBeHidden =
-      this.isLocalPlayerInfo || (store.state.preferences.onlyShowNametagsInFreeze && !this.el.sceneEl.is("frozen"));
+    // const infoShouldBeHidden =
+    //   this.isLocalPlayerInfo || (store.state.preferences.onlyShowNametagsInFreeze && !this.el.sceneEl.is("frozen"));
+
+    // If onlyShowNametagsInFreeze is undefined, then the user has not specified a preference. then Default to true in that case
+    // store.state.preferences.onlyShowNametagsInFreeze >> this is going to be set to false
+  
+    const onlyShowNametagsInFreeze = store.state.preferences.onlyShowNametagsInFreeze !== false;
+    const infoShouldBeHidden = this.isLocalPlayerInfo || (onlyShowNametagsInFreeze && !this.el.sceneEl.is("frozen"))
 
     const nametagEl = this.el.querySelector(".nametag");
     if (this.displayName && nametagEl) {
