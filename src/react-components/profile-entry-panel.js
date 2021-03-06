@@ -145,19 +145,20 @@ class ProfileEntryPanel extends Component {
             {this.props.displayNameOverride ? (
               <span className={styles.displayName}>{this.props.displayNameOverride}</span>
             ) : (
-              <input
-                id="profile-entry-display-name"
-                className={styles.formFieldText}
-                value={this.state.displayName}
-                onFocus={e => handleTextFieldFocus(e.target)}
-                onBlur={() => handleTextFieldBlur()}
-                onChange={e => this.setState({ displayName: e.target.value })}
-                required
-                spellCheck="false"
-                pattern={SCHEMA.definitions.profile.properties.displayName.pattern}
-                title={formatMessage({ id: "profile.display_name.validation_warning" })}
-                ref={inp => (this.nameInput = inp)}
-              />
+              <span>&nbsp;</span>
+              // <input
+              //   id="profile-entry-display-name"
+              //   className={styles.formFieldText}
+              //   value={this.state.displayName}
+              //   onFocus={e => handleTextFieldFocus(e.target)}
+              //   onBlur={() => handleTextFieldBlur()}
+              //   onChange={e => this.setState({ displayName: e.target.value })}
+              //   required
+              //   spellCheck="false"
+              //   pattern={SCHEMA.definitions.profile.properties.displayName.pattern}
+              //   title={formatMessage({ id: "profile.display_name.validation_warning" })}
+              //   ref={inp => (this.nameInput = inp)}
+              // />
             )}
 
             {this.state.avatar ? (
