@@ -191,12 +191,14 @@ AFRAME.registerComponent("teleporter", {
     const userinput = AFRAME.scenes[0].systems.userinput;
     const { start, confirm, speed } = this.data;
     const object3D = this.el.object3D;
+    
+    const disableTeleporterHardcoded = true
 
     if (
       !this.isTeleporting &&
       userinput.get(start) &&
       !this.characterController.isTeleportingDisabled &&
-      !window.APP.store.state.preferences.disableTeleporter
+      !disableTeleporterHardcoded
     ) {
       this.isTeleporting = true;
       this.timeTeleporting = 0;
