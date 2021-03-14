@@ -12,6 +12,9 @@ const MEDIA_SEARCH_PATHS = [
   paths.actions.mediaSearch8
 ];
 
+let INITIAL_UI_TOGGLED_OFF = false;
+let UI_TOGGLED_OFF = false;
+
 // Every frame, looks for input paths that trigger UI-relevant events and handles them.
 AFRAME.registerSystem("ui-hotkeys", {
   init() {
@@ -53,9 +56,22 @@ AFRAME.registerSystem("ui-hotkeys", {
       this.el.emit("action_toggle_camera");
     }
 
-    if (this.userinput.get(paths.actions.toggleUI)) {
-      if (this.el.sceneEl.is("entered")) {
+    var metas = APP.hubChannel.presence.state[NAF.clientId].metas; 
+
+    if (this.el.sceneEl.is("entered")) {
+        // This is how we get rid of the UI in 2D as soon as someone enters in
+        if (!INITIAL_UI_TOGGLED_OFF) {
         this.el.emit("action_toggle_ui");
+        UI_TOGGLED_OFF = true;
+        INITIAL_UI_TOGGLED_OFF = true;
+      } else if (this.userinput.get(paths.actions.toggleUI) && UI_TOGGLED_OFF && metas[metas.length-1].roles.signed_in) {
+        // This is for facilitars who want to toggle the 2D UI back on
+        this.el.emit("action_toggle_ui");
+        UI_TOGGLED_OFF = false;
+      } else if (this.userinput.get(paths.actions.toggleUI) && !UI_TOGGLED_OFF && metas[metas.length-1].roles.signed_in) {
+        // This is how we toggle it back off 
+        this.el.emit("action_toggle_ui");
+        UI_TOGGLED_OFF = true;
       }
     }
   },
