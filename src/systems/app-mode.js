@@ -63,9 +63,9 @@ AFRAME.registerComponent("vr-mode-toggle-playing", {
     this.el.components[componentName][inVRMode !== this.data.invert ? "play" : "pause"]();
   },
 
-  tick() {
-  this.pause();
-  }
+  // tick() {
+  // this.pause();
+  // }
 
 });
 
