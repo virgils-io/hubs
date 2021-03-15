@@ -82,6 +82,8 @@ AFRAME.registerComponent("hud-controller", {
     hud.position.y = (this.isYLocked ? this.lockedHeadPositionY : head.position.y) + offset + (1 - t) * offset;
     hud.rotation.x = (1 - t) * THREE.Math.DEG2RAD * 90;
     hud.matrixNeedsUpdate = true;
+    
+    this.pause();
   },
 
   play() {

@@ -61,7 +61,12 @@ AFRAME.registerComponent("vr-mode-toggle-playing", {
     const componentName = this.id;
     const inVRMode = this.el.sceneEl.is("vr-mode");
     this.el.components[componentName][inVRMode !== this.data.invert ? "play" : "pause"]();
+  },
+
+  tick() {
+  this.pause();
   }
+
 });
 
 /**
