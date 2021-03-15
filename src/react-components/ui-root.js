@@ -1965,12 +1965,12 @@ class UIRoot extends Component {
                   </button>
                 )}
 
-                {showInviteTip && (
+                {/* {showInviteTip && (
                   <div className={styles.inviteTip}>
                     <div className={styles.inviteTipAttachPoint} />
                     <FormattedMessage id={`entry.${isMobile ? "mobile" : "desktop"}.invite-tip`} />
                   </div>
-                )}
+                )} */}
                 {!embed &&
                   this.occupantCount() > 1 &&
                   !hasTopTip &&
