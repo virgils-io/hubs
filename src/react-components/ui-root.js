@@ -322,7 +322,7 @@ class UIRoot extends Component {
       if (!this.firstTimeEnteredHid2dHud) {
         this.setState({ hide: !this.state.hide }); 
         this.firstTimeEnteredHid2dHud = true;
-      } else if (this.props.store.state.credentials?.token) {
+      } else if (this.state.signedIn) {
         this.setState({ hide: !this.state.hide }); //only logged-in can unhide
       }
     });
@@ -1059,18 +1059,25 @@ class UIRoot extends Component {
     const { hasAcceptedProfile, hasChangedName } = this.props.store.state.activity;
     const promptForNameAndAvatarBeforeEntry = this.props.hubIsBound ? !hasAcceptedProfile : !hasChangedName;
 
+    const showSubtitle = true
+
     return (
       <div className={entryStyles.entryPanel}>
         <div className={entryStyles.name}>
-          <button
-            aria-label="Close room entry panel and spectate from lobby"
-            onClick={() => this.setState({ watching: true })}
-            className={entryStyles.collapseButton}
-          >
-            <i>
-              <FontAwesomeIcon icon={faTimes} />
-            </i>
-          </button>
+          
+          {this.state.signedIn ? (
+            <button
+              aria-label="Close room entry panel and spectate from lobby"
+              onClick={() => this.setState({ watching: true })}
+              className={entryStyles.collapseButton}
+            >
+              <i>
+                <FontAwesomeIcon icon={faTimes} />
+              </i>
+            </button>
+          ) : (
+            <span></span>
+          )}
 
           {this.props.hubChannel.canOrWillIfCreator("update_hub") ? (
             <button
@@ -1089,32 +1096,41 @@ class UIRoot extends Component {
             <span>{this.props.hub.name}</span>
           )}
 
-          <button
-            aria-label="Toggle Favorited"
-            onClick={() => this.toggleFavorited()}
-            className={classNames({
-              [entryStyles.entryFavoriteButton]: true,
-              [entryStyles.favoriteButton]: true,
-              [entryStyles.favorited]: this.isFavorited()
-            })}
-          >
-            <i title="Favorite">
-              <FontAwesomeIcon icon={faStar} />
-            </i>
-          </button>
+          {this.state.signedIn ? (
+            <button
+              aria-label="Toggle Favorited"
+              onClick={() => this.toggleFavorited()}
+              className={classNames({
+                [entryStyles.entryFavoriteButton]: true,
+                [entryStyles.favoriteButton]: true,
+                [entryStyles.favorited]: this.isFavorited()
+              })}
+            >
+              <i title="Favorite">
+                <FontAwesomeIcon icon={faStar} />
+              </i>
+            </button>
+          ) : (
+            <span></span>
+          )}
+
         </div>
 
-        <div className={entryStyles.roomSubtitle}>
-          <FormattedMessage id="entry.lobby" />
-        </div>
+        {showSubtitle && (
+          <div className={entryStyles.roomSubtitle}>
+            <FormattedMessage id="entry.lobby" />
+          </div>
+        )}
 
-        <div className={entryStyles.center}>
-          <LobbyChatBox
-            occupantCount={this.occupantCount()}
-            discordBridges={this.discordBridges()}
-            onSendMessage={this.sendMessage}
-          />
-        </div>
+        {this.state.signedIn && (
+          <div className={entryStyles.center}>
+            <LobbyChatBox
+              occupantCount={this.occupantCount()}
+              discordBridges={this.discordBridges()}
+              onSendMessage={this.sendMessage}
+            />
+          </div>
+        )}
 
         {!this.state.waitingOnAudio &&
           !this.props.entryDisallowed && (
@@ -1572,7 +1588,7 @@ class UIRoot extends Component {
     const clientInfoClientId = getClientInfoClientId(this.props.history.location);
     const showClientInfo = !!clientInfoClientId;
     const showObjectInfo = !!(this.state.objectInfo && this.state.objectInfo.object3D);
-
+    
     const discordBridges = this.discordBridges();
     const discordSnippet = discordBridges.map(ch => "#" + ch).join(", ");
     const hasEmbedPresence = this.hasEmbedPresence();
@@ -1581,19 +1597,19 @@ class UIRoot extends Component {
       (hasDiscordBridges || (hasEmbedPresence && !this.props.embed)) && !this.state.broadcastTipDismissed;
 
     const inviteEntryMode = this.props.hub && this.props.hub.entry_mode === "invite";
-    const showInviteButton = !showObjectInfo && !this.state.frozen && !watching && !preload && !inviteEntryMode;
+    const showInviteButton = !showObjectInfo && !this.state.frozen && !watching && !preload && !inviteEntryMode && this.state.signedIn;
 
-    const showInviteTip =
-      !showObjectInfo &&
-      !hasTopTip &&
-      !entered &&
-      !embed &&
-      !preload &&
-      !watching &&
-      !hasTopTip &&
-      !inEntryFlow &&
-      !this.props.store.state.activity.hasOpenedShare &&
-      this.occupantCount() <= 1;
+    const showInviteTip = false
+      // !showObjectInfo &&
+      // !hasTopTip &&
+      // !entered &&
+      // !embed &&
+      // !preload &&
+      // !watching &&
+      // !hasTopTip &&
+      // !inEntryFlow &&
+      // !this.props.store.state.activity.hasOpenedShare &&
+      // this.occupantCount() <= 1;
 
     const showChooseSceneButton =
       !showObjectInfo &&
@@ -1601,17 +1617,17 @@ class UIRoot extends Component {
       !embed &&
       !preload &&
       !watching &&
-      !showInviteTip &&
       !this.state.showShareDialog &&
       this.props.hubChannel &&
-      this.props.hubChannel.canOrWillIfCreator("update_hub");
+      this.props.hubChannel.canOrWillIfCreator("update_hub") && 
+      this.state.signedIn;
 
     const streaming = this.state.isStreaming;
 
-    const showTopHud = enteredOrWatching && !showObjectInfo;
-    const showSettingsMenu = !streaming && !preload && !showObjectInfo;
-    const showObjectList = !showObjectInfo;
-    const showPresenceList = !showObjectInfo;
+    const showTopHud = enteredOrWatching && !showObjectInfo && this.state.signedIn;
+    const showSettingsMenu = !streaming && !preload && !showObjectInfo && this.state.signedIn;
+    const showObjectList = !showObjectInfo && this.state.signedIn;
+    const showPresenceList = !showObjectInfo && this.state.signedIn;
 
     const displayNameOverride = this.props.hubIsBound
       ? getPresenceProfileForSession(this.props.presences, this.props.sessionId).displayName
@@ -1974,12 +1990,12 @@ class UIRoot extends Component {
                   </button>
                 )}
 
-                {/* {showInviteTip && (
+                {showInviteTip && (
                   <div className={styles.inviteTip}>
                     <div className={styles.inviteTipAttachPoint} />
                     <FormattedMessage id={`entry.${isMobile ? "mobile" : "desktop"}.invite-tip`} />
                   </div>
-                )} */}
+                )}
                 {!embed &&
                   this.occupantCount() > 1 &&
                   !hasTopTip &&

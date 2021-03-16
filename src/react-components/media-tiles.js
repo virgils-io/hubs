@@ -50,6 +50,8 @@ class MediaTiles extends Component {
     onShowSimilar: PropTypes.func
   };
 
+  signedIn = window.APP.store.state.credentials?.token;
+
   handleCopyAvatar = async (e, entry) => {
     e.preventDefault();
     await remixAvatar(entry.id, entry.name);
@@ -72,7 +74,7 @@ class MediaTiles extends Component {
     return (
       <div className={styles.body}>
         <div className={classNames({ [styles.tiles]: true, [styles.tilesVariable]: isVariableWidth })}>
-          {(urlSource === "avatars" || urlSource === "scenes") && (
+          {this.signedIn && (urlSource === "avatars" || urlSource === "scenes") && (
             <div
               style={{ width: `${createTileWidth}px`, height: `${createTileHeight}px` }}
               className={classNames({
@@ -157,7 +159,6 @@ class MediaTiles extends Component {
     const isAvatar = ["avatar", "avatar_listing"].includes(entry.type);
     const isHub = ["room"].includes(entry.type);
     const imageAspect = entry.images.preview.width / entry.images.preview.height;
-
     const [imageWidth, imageHeight] = this.getTileDimensions(isImage, isAvatar, imageAspect);
 
     // Inline mp4s directly since far/nearspark cannot resize them.
@@ -198,7 +199,7 @@ class MediaTiles extends Component {
           {thumbnailElement}
         </a>
         <div className={styles.tileActions}>
-          {entry.type === "avatar" && (
+          {this.signedIn && entry.type === "avatar" && (
             <StateLink
               stateKey="overlay"
               stateValue="avatar-editor"
@@ -209,7 +210,7 @@ class MediaTiles extends Component {
               <FontAwesomeIcon icon={faPencilAlt} />
             </StateLink>
           )}
-          {entry.type === "avatar_listing" && (
+          {this.signedIn && entry.type === "avatar_listing" && (
             <a
               onClick={e => {
                 e.preventDefault();
@@ -220,19 +221,19 @@ class MediaTiles extends Component {
               <FontAwesomeIcon icon={faSearch} />
             </a>
           )}
-          {entry.type === "avatar_listing" &&
+          {this.signedIn && entry.type === "avatar_listing" &&
             entry.allow_remixing && (
               <a onClick={e => this.handleCopyAvatar(e, entry)} title="Copy to my avatars">
                 <FontAwesomeIcon icon={faClone} />
               </a>
             )}
-          {entry.type === "scene_listing" &&
+          {this.signedIn && entry.type === "scene_listing" &&
             entry.allow_remixing && (
               <a onClick={e => this.handleCopyScene(e, entry)} title="Copy to my scenes">
                 <FontAwesomeIcon icon={faClone} />
               </a>
             )}
-          {entry.type === "scene" &&
+          {this.signedIn && entry.type === "scene" &&
             entry.project_id && (
               <a
                 target="_blank"
@@ -243,7 +244,7 @@ class MediaTiles extends Component {
                 <FontAwesomeIcon icon={faPencilAlt} />
               </a>
             )}
-          {entry.type === "room" &&
+          {this.signedIn && entry.type === "room" &&
             this.props.handleEntryInfoClicked &&
             entry.description && (
               <a
