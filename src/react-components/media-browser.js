@@ -67,9 +67,9 @@ const DEFAULT_FACETS = {
     { text: "Transport", params: { filter: "transport" } }
   ],
   avatars: [
-    { text: "Featured", params: { filter: "featured" } },
-    { text: "My Avatars", params: { filter: "my-avatars" } },
-    { text: "Newest", params: { filter: "" } }
+    { text: "Select Your Avatar", params: { filter: "featured" } }
+    // { text: "My Avatars", params: { filter: "my-avatars" } },
+    // { text: "Newest", params: { filter: "" } }
   ],
   favorites: [],
   scenes: [{ text: "Featured", params: { filter: "featured" } }, { text: "My Scenes", params: { filter: "my-scenes" } }]
@@ -260,7 +260,8 @@ class MediaBrowser extends Component {
     const showCustomOption =
       !isFavorites && (!isSceneApiType || this.props.hubChannel.canOrWillIfCreator("update_hub"));
     const entries = (this.state.result && this.state.result.entries) || [];
-    const hideSearch = urlSource === "favorites";
+    // const hideSearch = urlSource === "favorites";
+    const hideSearch = true;
     const showEmptyStringOnNoResult = urlSource !== "avatars" && urlSource !== "scenes";
 
     const facets = this.state.facets && this.state.facets.length > 0 && this.state.facets;

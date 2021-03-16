@@ -114,6 +114,7 @@ const AUTO_EXIT_TIMER_SECONDS = 10;
 
 class UIRoot extends Component {
   willCompileAndUploadMaterials = false;
+  firstTimeEnteredHid2dHud = false;
 
   static propTypes = {
     enterScene: PropTypes.func,
@@ -213,7 +214,7 @@ class UIRoot extends Component {
     isObjectListExpanded: false,
     isPresenceListExpanded: false
   };
-
+  
   constructor(props) {
     super(props);
 
@@ -316,7 +317,15 @@ class UIRoot extends Component {
         this.setState({ watching: false });
       }
     });
-    this.props.scene.addEventListener("action_toggle_ui", () => this.setState({ hide: !this.state.hide }));
+
+    this.props.scene.addEventListener("action_toggle_ui", () => {
+      if (!this.firstTimeEnteredHid2dHud) {
+        this.setState({ hide: !this.state.hide }); 
+        this.firstTimeEnteredHid2dHud = true;
+      } else if (this.props.store.state.credentials?.token) {
+        this.setState({ hide: !this.state.hide }); //only logged-in can unhide
+      }
+    });
 
     const scene = this.props.scene;
 
@@ -379,7 +388,7 @@ class UIRoot extends Component {
     this.props.scene.removeEventListener("share_video_failed", this.onShareVideoFailed);
     this.props.store.removeEventListener("statechanged", this.storeUpdated);
   }
-
+  
   storeUpdated = () => {
     this.forceUpdate();
   };

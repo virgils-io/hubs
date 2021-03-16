@@ -55,25 +55,10 @@ AFRAME.registerSystem("ui-hotkeys", {
     if (this.userinput.get(paths.actions.toggleCamera)) {
       this.el.emit("action_toggle_camera");
     }
-
-    // var metas = window.APP.hubChannel.presence.state[NAF.clientId].metas; 
-
-    if (this.el.sceneEl.is("entered")) {
-        // This is how we get rid of the UI in 2D as soon as someone enters in
-        if (!INITIAL_UI_TOGGLED_OFF) {
+    
+    if (this.userinput.get(paths.actions.toggleUI)) {
+      if (this.el.sceneEl.is("entered")) {
         this.el.emit("action_toggle_ui");
-        UI_TOGGLED_OFF = true;
-        INITIAL_UI_TOGGLED_OFF = true;
-      // } else if (this.userinput.get(paths.actions.toggleUI) && UI_TOGGLED_OFF && metas[metas.length-1].roles.signed_in) {
-      } else if (this.userinput.get(paths.actions.toggleUI) && UI_TOGGLED_OFF) {
-        // This is for facilitars who want to toggle the 2D UI back on
-        this.el.emit("action_toggle_ui");
-        UI_TOGGLED_OFF = false;
-      // } else if (this.userinput.get(paths.actions.toggleUI) && !UI_TOGGLED_OFF && metas[metas.length-1].roles.signed_in) {
-      } else if (this.userinput.get(paths.actions.toggleUI) && !UI_TOGGLED_OFF) {
-        // This is how we toggle it back off 
-        this.el.emit("action_toggle_ui");
-        UI_TOGGLED_OFF = true;
       }
     }
   },
