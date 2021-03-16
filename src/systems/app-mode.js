@@ -28,6 +28,10 @@ AFRAME.registerComponent("vr-mode-toggle-visibility", {
   updateComponentState() {
     const inVRMode = this.el.sceneEl.is("vr-mode");
     this.el.setAttribute("visible", inVRMode !== this.data.invert);
+  },
+
+  tick() {
+    this.pause()
   }
 });
 
@@ -63,9 +67,9 @@ AFRAME.registerComponent("vr-mode-toggle-playing", {
     this.el.components[componentName][inVRMode !== this.data.invert ? "play" : "pause"]();
   },
 
-  // tick() {
-  // this.pause();
-  // }
+  tick() {
+  this.pause();
+  }
 
 });
 
