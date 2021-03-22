@@ -24,6 +24,7 @@ const AvatarListingFilter = props => (
   <Filter {...props}>
     <TextInput label="Search Name" source="name" alwaysOn />
     <TextInput label="Search SID" source="avatar_listing_sid" alwaysOn />
+    <TextInput label="Search Custom Tags" source="tags.tags" alwaysOn />
   </Filter>
 );
 
