@@ -69,6 +69,7 @@ export const AvatarListingList = props => (
       <TextField source="attributions" />
       <BooleanField source="allow_remixing" />
       <DateField source="updated_at" />
+      <TextField label="Status" source="state" />
       <FeatureAvatarListingButton />
       <EditButton />
     </Datagrid>

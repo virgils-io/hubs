@@ -257,8 +257,8 @@ class MediaBrowser extends Component {
     const urlSource = this.getUrlSource(searchParams);
     const isSceneApiType = urlSource === "scenes";
     const isFavorites = urlSource === "favorites";
-    const showCustomOption =
-      !isFavorites && (!isSceneApiType || this.props.hubChannel.canOrWillIfCreator("update_hub"));
+    const showCustomOption = false
+      // !isFavorites && (!isSceneApiType || this.props.hubChannel.canOrWillIfCreator("update_hub"));
     const entries = (this.state.result && this.state.result.entries) || [];
     // const hideSearch = urlSource === "favorites";
     const hideSearch = true;
