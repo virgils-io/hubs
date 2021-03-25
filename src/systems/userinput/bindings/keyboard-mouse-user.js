@@ -113,11 +113,11 @@ export const keyboardMouseUserBindings = addSetsToBindings({
       dest: { value: paths.actions.snapRotateRight },
       xform: xforms.rising
     },
-    // {
-    //   src: { value: paths.device.keyboard.key("Tab") },
-    //   dest: { value: paths.actions.toggleFreeze },
-    //   xform: xforms.rising
-    // },
+    {
+      src: { value: paths.device.keyboard.key("Tab") },
+      dest: { value: paths.actions.toggleFreeze }, // this is turned off in freeze-controller.js
+      xform: xforms.rising
+    },
     {
       src: { value: paths.device.keyboard.key(" ") },
       dest: { value: paths.actions.ensureFrozen },
@@ -151,7 +151,7 @@ export const keyboardMouseUserBindings = addSetsToBindings({
     },
     {
       src: { value: paths.device.keyboard.key("c") },
-      dest: { value: paths.actions.toggleCamera },
+      dest: { value: paths.actions.toggleCamera }, // this is turned off in ui-hotkeys.js
       xform: xforms.rising
     },
     {
