@@ -170,20 +170,22 @@ AFRAME.registerComponent("emoji-hud", {
   })(),
 
   play() {
-    this.el.sceneEl.addEventListener("stateadded", this._onFrozen);
-    this.el.sceneEl.addEventListener("stateremoved", this._onThaw);
-    this._updateOffset();
-  },
-
-  pause() {
+  //   this.el.sceneEl.addEventListener("stateadded", this._onFrozen);
+  //   this.el.sceneEl.addEventListener("stateremoved", this._onThaw);
+  //   this._updateOffset();
     this.el.sceneEl.removeEventListener("stateadded", this._onFrozen);
     this.el.sceneEl.removeEventListener("stateremoved", this._onThaw);
-  },
+  }, 
+
+  // pause() {
+  //   this.el.sceneEl.removeEventListener("stateadded", this._onFrozen);
+  //   this.el.sceneEl.removeEventListener("stateremoved", this._onThaw);
+  // },
 
   tick() {
     if (
       window.APP.hubChannel &&
-      window.APP.hubChannel.can("spawn_emoji") &&
+      window.APP.hubChannel.can("spawn_emoji") && //This is where spawn emoji checkbox is checked 
       this.lastSpawnTime + this.data.spawnCooldown * 1000 < performance.now()
     ) {
       const userinput = AFRAME.scenes[0].systems.userinput;
