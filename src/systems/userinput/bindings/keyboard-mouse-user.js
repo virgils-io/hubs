@@ -120,7 +120,7 @@ export const keyboardMouseUserBindings = addSetsToBindings({
     },
     {
       src: { value: paths.device.keyboard.key(" ") },
-      dest: { value: paths.actions.ensureFrozen }, // emoji is controlled in emoji-hud.js & removed hide a frame object in hub.html
+      dest: { value: paths.actions.ensureFrozen }, // emoji is controlled in emoji-hud.js & removed hide a frame object in hub.html & remove name tags in player-info.js
       xform: xforms.copy
     },
     {
