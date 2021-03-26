@@ -166,6 +166,7 @@ export class CharacterControllerSystem {
       const vrMode = this.scene.is("vr-mode");
       this.sfx = this.sfx || this.scene.systems["hubs-systems"].soundEffectsSystem;
       this.waypointSystem = this.waypointSystem || this.scene.systems["hubs-systems"].waypointSystem;
+      const signedIn = window.APP.store.state.credentials?.token;
 
       if (!this.activeWaypoint && this.waypoints.length) {
         this.activeWaypoint = this.waypoints.splice(0, 1)[0];
@@ -288,7 +289,7 @@ export class CharacterControllerSystem {
             snapRotatedPOV,
             this.fly || !navMeshExists,
             this.relativeMotion.multiplyScalar(
-              ((userinput.get(paths.actions.boost) ? 2 : 1) *
+              (((userinput.get(paths.actions.boost) && signedIn) ? 2 : 1) *
                 speedModifier *
                 BASE_SPEED *
                 Math.sqrt(playerScale) *
