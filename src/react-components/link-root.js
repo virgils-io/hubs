@@ -203,7 +203,7 @@ class LinkRoot extends Component {
                 />
               </div>
 
-              <div className={styles.enteredFooter}>
+              {/* <div className={styles.enteredFooter}>
                 {!this.state.isAlphaMode && (
                   <span>
                     <a href="#" onClick={() => this.toggleMode()}>
@@ -211,7 +211,7 @@ class LinkRoot extends Component {
                     </a>
                   </span>
                 )}
-              </div>
+              </div> */}
             </div>
 
             <div className={styles.keypad}>
@@ -279,11 +279,11 @@ class LinkRoot extends Component {
                 </div>
               )}
             </div>
-            <div className={styles.createLink}>
+            {/* <div className={styles.createLink}>
               <a href="/">
                 <FormattedMessage id="link.create_a_room" />
               </a>
-            </div>
+            </div> */}
           </div>
         </div>
       </WrappedIntlProvider>
