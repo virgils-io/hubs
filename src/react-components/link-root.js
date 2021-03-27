@@ -159,7 +159,7 @@ class LinkRoot extends Component {
       <WrappedIntlProvider>
         <div className={styles.link}>
           <div className={styles.linkContents}>
-            <a className={styles.logo} href="/">
+            <a className={styles.logo} href="https://virgils.io">
               <img src={configs.image("logo")} />
             </a>
             {this.state.entered.length === this.maxAllowedChars() && (
