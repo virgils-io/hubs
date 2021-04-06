@@ -79,16 +79,14 @@ AFRAME.registerComponent("hud-controller", {
     hud.visible = false;
     hud.position.y = (this.isYLocked ? this.lockedHeadPositionY : head.position.y) + offset + (1 - t) * offset;
     hud.rotation.x = (1 - t) * THREE.Math.DEG2RAD * 90;
-    hud.matrixNeedsUpdate = true;
-    
-    this.pause();
+    hud.matrixNeedsUpdate = true;    
   },
 
-  play() {
-    for (let i = 0; i < this.hoverableChildren.length; i++) {
-      this.hoverableChildren[i].object3D.addEventListener("hovered", this.onChildHovered);
-    }
-  },
+  // play() {
+  //   for (let i = 0; i < this.hoverableChildren.length; i++) {
+  //     this.hoverableChildren[i].object3D.addEventListener("hovered", this.onChildHovered);
+  //   }
+  // },
 
   pause() {
     this.removeHoverEvents();
