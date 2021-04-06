@@ -123,7 +123,7 @@ export default class SceneEntryManager {
 
     this.scene.addState("entered");
 
-    if (this._entered) {
+    if (this._entered && !enterInVR) {
       this.scene.emit("action_toggle_ui");
     }
 
