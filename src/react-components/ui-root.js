@@ -114,7 +114,7 @@ const AUTO_EXIT_TIMER_SECONDS = 10;
 
 class UIRoot extends Component {
   willCompileAndUploadMaterials = false;
-  firstTimeEnteredHid2dHud = false;
+  // firstTimeEnteredHid2dHud = false;
 
   static propTypes = {
     enterScene: PropTypes.func,
@@ -319,12 +319,14 @@ class UIRoot extends Component {
     });
 
     this.props.scene.addEventListener("action_toggle_ui", () => {
-      if (!this.firstTimeEnteredHid2dHud) {
-        this.setState({ hide: !this.state.hide }); 
-        this.firstTimeEnteredHid2dHud = true;
-      } else if (this.state.signedIn) {
-        this.setState({ hide: !this.state.hide }); //only logged-in can unhide
-      }
+      // if (!this.firstTimeEnteredHid2dHud) {
+      //   this.setState({ hide: !this.state.hide }); 
+      //   this.firstTimeEnteredHid2dHud = true;
+      // // } else if (this.state.signedIn) {
+      // } else {
+        // this.setState({ hide: !this.state.hide }); //only logged-in can unhide
+      // }
+      this.setState({ hide: !this.state.hide });
     });
 
     const scene = this.props.scene;
@@ -1583,7 +1585,7 @@ class UIRoot extends Component {
     // Allow scene picker pre-entry, otherwise wait until entry
     const showMediaBrowser =
       mediaSource && (["scenes", "avatars", "favorites"].includes(mediaSource) || this.state.entered);
-    const hasTopTip = (this.props.activeTips && this.props.activeTips.top) || this.state.showVideoShareFailed;
+    const hasTopTip = false // (this.props.activeTips && this.props.activeTips.top) || this.state.showVideoShareFailed;
 
     const clientInfoClientId = getClientInfoClientId(this.props.history.location);
     const showClientInfo = !!clientInfoClientId;
@@ -1593,11 +1595,12 @@ class UIRoot extends Component {
     const discordSnippet = discordBridges.map(ch => "#" + ch).join(", ");
     const hasEmbedPresence = this.hasEmbedPresence();
     const hasDiscordBridges = discordBridges.length > 0;
-    const showBroadcastTip =
-      (hasDiscordBridges || (hasEmbedPresence && !this.props.embed)) && !this.state.broadcastTipDismissed;
+    const showBroadcastTip = false
+      // (hasDiscordBridges || (hasEmbedPresence && !this.props.embed)) && !this.state.broadcastTipDismissed && this.state.signedIn;
 
     const inviteEntryMode = this.props.hub && this.props.hub.entry_mode === "invite";
     const showInviteButton = !showObjectInfo && !this.state.frozen && !watching && !preload && !inviteEntryMode && this.state.signedIn;
+    const showActiveTip = false
 
     const showInviteTip = false
       // !showObjectInfo &&
@@ -1625,7 +1628,8 @@ class UIRoot extends Component {
     const streaming = this.state.isStreaming;
 
     const showTopHud = enteredOrWatching && !showObjectInfo && this.state.signedIn;
-    const showSettingsMenu = !streaming && !preload && !showObjectInfo && this.state.signedIn;
+    // const showSettingsMenu = !streaming && !preload && !showObjectInfo && this.state.signedIn && this.state.entered;
+    const showSettingsMenu = !streaming && !preload && !showObjectInfo;
     const showObjectList = !showObjectInfo && this.state.signedIn;
     const showPresenceList = !showObjectInfo && this.state.signedIn;
 
@@ -1891,17 +1895,20 @@ class UIRoot extends Component {
             )}
             {((!enteredOrWatching && !this.state.isObjectListExpanded && !showObjectInfo && this.props.hub) ||
               this.isWaitingForAutoExit()) && (
-              <div className={styles.uiDialog}>
-                <PresenceLog
-                  entries={presenceLogEntries}
-                  presences={this.props.presences}
-                  hubId={this.props.hub.hub_id}
-                  history={this.props.history}
-                />
-                <div className={dialogBoxContentsClassNames}>{entryDialog}</div>
-              </div>
-            )}
+                <div className={styles.uiDialog}>
+                  {this.state.signedIn && (
+                    <PresenceLog
+                      entries={presenceLogEntries}
+                      presences={this.props.presences}
+                      hubId={this.props.hub.hub_id}
+                      history={this.props.history}
+                    />
+                  )}
+                  <div className={dialogBoxContentsClassNames}>{entryDialog}</div>
+                </div>
+              )}
             {enteredOrWatchingOrPreload &&
+              this.state.signedIn &&
               this.props.hub && (
                 <PresenceLog
                   inRoom={true}
@@ -1912,6 +1919,7 @@ class UIRoot extends Component {
                 />
               )}
             {entered &&
+              showActiveTip &&
               this.props.activeTips &&
               this.props.activeTips.bottom &&
               (!presenceLogEntries || presenceLogEntries.length === 0) &&
@@ -1928,6 +1936,7 @@ class UIRoot extends Component {
               )}
             {enteredOrWatchingOrPreload &&
               !this.state.objectInfo &&
+              this.state.signedIn &&
               !this.state.frozen && (
                 <InWorldChatBox
                   discordBridges={discordBridges}
@@ -2122,7 +2131,7 @@ class UIRoot extends Component {
               />
             )}
 
-            {showSettingsMenu && (
+            {showSettingsMenu && entered ? (
               <SettingsMenu
                 history={this.props.history}
                 mediaSearchStore={this.props.mediaSearchStore}
@@ -2140,6 +2149,26 @@ class UIRoot extends Component {
                 }}
                 pushHistoryState={this.pushHistoryState}
               />
+            ) : (this.state.signedIn ? (
+                  <SettingsMenu
+                  history={this.props.history}
+                  mediaSearchStore={this.props.mediaSearchStore}
+                  isStreaming={streaming}
+                  toggleStreamerMode={this.toggleStreamerMode}
+                  hubChannel={this.props.hubChannel}
+                  hubScene={this.props.hub && this.props.hub.scene}
+                  scene={this.props.scene}
+                  showAsOverlay={showSettingsAsOverlay}
+                  onCloseOverlay={() => exit2DInterstitialAndEnterVR(true)}
+                  performConditionalSignIn={this.props.performConditionalSignIn}
+                  showNonHistoriedDialog={this.showNonHistoriedDialog}
+                  showPreferencesScreen={() => {
+                    this.setState({ showPrefs: true });
+                  }}
+                  pushHistoryState={this.pushHistoryState}
+                  />) : (
+                  <span></span>
+                )
             )}
             {!entered && !streaming && !isMobile && streamerName && <SpectatingLabel name={streamerName} />}
             {showTopHud && (
