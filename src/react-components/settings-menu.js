@@ -71,11 +71,11 @@ export default class SettingsMenu extends Component {
     //
     // The reason I didn't do this with CSS is because this changes available functionality, so being more
     // explicit in code seems like a wise idea.
-    const hideExtranousItems = this.props.showAsOverlay;
+    const hideExtranousItems = !this.props.hubChannel.signedIn // this.props.showAsOverlay;
 
     const showRoomSettings = !!this.props.hubChannel.canOrWillIfCreator("update_hub");
     const showCloseRoom = !!this.props.hubChannel.canOrWillIfCreator("close_hub");
-    const showRoomInfo = !!this.props.hubScene && !hideExtranousItems;
+    const showRoomInfo = !!this.props.hubScene && !hideExtranousItems && this.props.hubChannel.signedIn;
     const showRoomSection = showRoomSettings || showRoomInfo || showCloseRoom;
     const showStreamerMode =
       this.props.scene.is("entered") && !!this.props.hubChannel.canOrWillIfCreator("kick_users") && !hideExtranousItems;
@@ -120,31 +120,33 @@ export default class SettingsMenu extends Component {
                 </StateLink>
               </div>
             </div>
-            <div className={rowClasses}>
-              <div className={styles.icon}>
-                <i>
-                  <FontAwesomeIcon icon={faStar} />
-                </i>
-              </div>
-              <div className={styles.listItem}>
-                <div
-                  className={styles.listItemLink}
-                  role="button"
-                  onClick={() => {
-                    this.props.performConditionalSignIn(
-                      () => this.props.hubChannel.signedIn,
-                      () => {
-                        showFullScreenIfAvailable();
-                        this.props.mediaSearchStore.sourceNavigateWithNoNav("favorites", "use");
-                      },
-                      "favorite-rooms"
-                    );
-                  }}
-                >
-                  <FormattedMessage id="settings.favorites" />
+            {!hideExtranousItems && (
+              <div className={rowClasses}>
+                <div className={styles.icon}>
+                  <i>
+                    <FontAwesomeIcon icon={faStar} />
+                  </i>
+                </div>
+                <div className={styles.listItem}>
+                  <div
+                    className={styles.listItemLink}
+                    role="button"
+                    onClick={() => {
+                      this.props.performConditionalSignIn(
+                        () => this.props.hubChannel.signedIn,
+                        () => {
+                          showFullScreenIfAvailable();
+                          this.props.mediaSearchStore.sourceNavigateWithNoNav("favorites", "use");
+                        },
+                        "favorite-rooms"
+                      );
+                    }}
+                  >
+                    <FormattedMessage id="settings.favorites" />
+                  </div>
                 </div>
               </div>
-            </div>
+            )}
             <div className={rowClasses}>
               <div className={styles.icon}>
                 <i>
