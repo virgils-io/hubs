@@ -2131,7 +2131,7 @@ class UIRoot extends Component {
               />
             )}
 
-            {showSettingsMenu && entered ? (
+            {showSettingsMenu && (
               <SettingsMenu
                 history={this.props.history}
                 mediaSearchStore={this.props.mediaSearchStore}
@@ -2149,26 +2149,6 @@ class UIRoot extends Component {
                 }}
                 pushHistoryState={this.pushHistoryState}
               />
-            ) : (this.state.signedIn ? (
-                  <SettingsMenu
-                  history={this.props.history}
-                  mediaSearchStore={this.props.mediaSearchStore}
-                  isStreaming={streaming}
-                  toggleStreamerMode={this.toggleStreamerMode}
-                  hubChannel={this.props.hubChannel}
-                  hubScene={this.props.hub && this.props.hub.scene}
-                  scene={this.props.scene}
-                  showAsOverlay={showSettingsAsOverlay}
-                  onCloseOverlay={() => exit2DInterstitialAndEnterVR(true)}
-                  performConditionalSignIn={this.props.performConditionalSignIn}
-                  showNonHistoriedDialog={this.showNonHistoriedDialog}
-                  showPreferencesScreen={() => {
-                    this.setState({ showPrefs: true });
-                  }}
-                  pushHistoryState={this.pushHistoryState}
-                  />) : (
-                  <span></span>
-                )
             )}
             {!entered && !streaming && !isMobile && streamerName && <SpectatingLabel name={streamerName} />}
             {showTopHud && (
