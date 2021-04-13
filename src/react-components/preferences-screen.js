@@ -530,7 +530,7 @@ const DEFINITIONS = new Map([
         max: 90,
         step: 5,
         digits: 0,
-        defaultNumber: 45
+        defaultNumber: 30
       },
       { key: "disableMovement", prefType: PREFERENCE_LIST_ITEM_TYPE.CHECK_BOX, defaultBool: false },
       { key: "disableBackwardsMovement", prefType: PREFERENCE_LIST_ITEM_TYPE.CHECK_BOX, defaultBool: false },
