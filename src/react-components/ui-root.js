@@ -1137,7 +1137,7 @@ class UIRoot extends Component {
         {!this.state.waitingOnAudio &&
           !this.props.entryDisallowed && (
             <div className={entryStyles.buttonContainer}>
-              {!isMobileVR && (
+              {/* {!isMobileVR && (
                 <button
                   onClick={e => {
                     e.preventDefault();
@@ -1152,7 +1152,7 @@ class UIRoot extends Component {
                     />
                   </div>
                 </button>
-              )}
+              )} */}
               {configs.feature("enable_lobby_ghosts") ? (
                 <button
                   onClick={e => {
@@ -1264,9 +1264,9 @@ class UIRoot extends Component {
                 <FormattedMessage id="entry.cardboard" />
               </div>
             )}
-            {this.props.availableVREntryTypes.generic !== VR_DEVICE_AVAILABILITY.no && (
+            {/* {this.props.availableVREntryTypes.generic !== VR_DEVICE_AVAILABILITY.no && (
               <GenericEntryButton secondary={true} onClick={this.enterVR} />
-            )}
+            )} */}
             {this.props.availableVREntryTypes.daydream === VR_DEVICE_AVAILABILITY.yes && (
               <DaydreamEntryButton secondary={true} onClick={this.enterDaydream} subtitle={null} />
             )}
