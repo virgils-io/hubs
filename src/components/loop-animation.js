@@ -53,7 +53,6 @@ AFRAME.registerComponent("loop-animation", {
     } else {
       // Support for old Spoke->Hubs { clipName, activeClipIndex } struct. Still used for Blender imports.
       if (clipName !== "") {
-        // clips = clipName.split(",").map(n => animations.find(({ name }) => name === n));
         const clipNames = clipName.split(",");
         for (let i = 0; i < clipNames.length; i++) {
           const n = clipNames[i];
