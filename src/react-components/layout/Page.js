@@ -29,6 +29,7 @@ export function Page({
   showDiscordBotLink,
   appName,
   children,
+  showFooter,
   ...rest
 }) {
   return (
@@ -50,18 +51,20 @@ export function Page({
         onSignOut={onSignOut}
       />
       <main {...rest}>{children}</main>
-      <Footer
-        hidePoweredBy={hidePoweredBy}
-        showWhatsNewLink={showWhatsNewLink}
-        showTerms={showTerms}
-        termsUrl={termsUrl}
-        showPrivacy={showPrivacy}
-        privacyUrl={privacyUrl}
-        showCompanyLogo={showCompanyLogo}
-        companyLogoUrl={companyLogoUrl}
-        showDiscordBotLink={showDiscordBotLink}
-        appName={appName}
-      />
+      {showFooter && (
+        <Footer
+          hidePoweredBy={hidePoweredBy}
+          showWhatsNewLink={showWhatsNewLink}
+          showTerms={showTerms}
+          termsUrl={termsUrl}
+          showPrivacy={showPrivacy}
+          privacyUrl={privacyUrl}
+          showCompanyLogo={showCompanyLogo}
+          companyLogoUrl={companyLogoUrl}
+          showDiscordBotLink={showDiscordBotLink}
+          appName={appName}
+        />
+      )}
     </>
   );
 }
@@ -90,5 +93,10 @@ Page.propTypes = {
   companyLogoUrl: PropTypes.string,
   showDiscordBotLink: PropTypes.bool,
   appName: PropTypes.string,
-  children: PropTypes.node
+  children: PropTypes.node,
+  showFooter: PropTypes.bool
+};
+
+Page.defaultProps = {
+  showFooter: false
 };
