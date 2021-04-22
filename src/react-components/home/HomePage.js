@@ -60,7 +60,7 @@ export function HomePage() {
             {canCreateRooms && <CreateRoomButton />}
             <PWAButton />
           </div>
-          <div className={styles.heroImageContainer}>
+          {/* <div className={styles.heroImageContainer}>
             <img
               alt={intl.formatMessage(
                 {
@@ -71,7 +71,7 @@ export function HomePage() {
               )}
               src={configs.image("home_background")}
             />
-          </div>
+          </div> */}
         </div>
       </Container>
       {configs.feature("show_feature_panels") && (
