@@ -5,7 +5,8 @@
 // Theme CSS Variables
 // Injected theme will overwrite these defaults
 :root {
-  --font-family-default: 'Poppins', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  --font-family-default: roboto;
+  // --font-family-default: 'Poppins', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   --font-family-monospace: Consolas, "Andale Mono WT", "Andale Mono", "Lucida Console", "Lucida Sans Typewriter", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Liberation Mono", "Nimbus Mono L", Monaco, "Courier New", Courier, monospace;
 
   --text1-color: #{theme.$black};
@@ -27,7 +28,7 @@
   --text6-color-hover: var(--text6-color);
   --text6-color-pressed: var(--text6-color);
 
-  --link-color: #{theme.$blue};
+  --link-color: #{theme.$virgils-blue};
   --link-color-hover: #{theme.$blue-hover};
   --link-color-pressed: #{theme.$blue-pressed};
 
@@ -59,9 +60,9 @@
   --accent5-color-hover: #{theme.$purple-hover};
   --accent5-color-pressed: #{theme.$purple-pressed};
 
-  --primary-color: #{theme.$blue};
-  --primary-color-hover: #{theme.$blue-hover};
-  --primary-color-pressed: #{theme.$blue-pressed};
+  --primary-color: #{theme.$virgils-purple};
+  --primary-color-hover: #{theme.$virgils-blue};
+  --primary-color-pressed: #{theme.$virgils-blue};
 
   --secondary-color: #{theme.$lightgrey};
   --secondary-color-hover: #{theme.$lightgrey-hover};
@@ -72,7 +73,7 @@
   --background3-color: #{theme.$lightgrey};
   --background4-color: #{theme.$grey};
 
-  --loading-screen-background: radial-gradient(50% 50% at 50% 50%, #FFFFFF 0%, #EEEEEE 100%);
+  --loading-screen-background: linear-gradient(50% 50% at 50% 50%, #{theme.$virgils-purple} 0%, #{theme.$virgils-blue} 100%);
 
   --border1-color: #{theme.$lightgrey};
   --border2-color: #{theme.$grey};
