@@ -802,9 +802,9 @@ class UIRoot extends Component {
               this.handleForceEntry();
             }
           }}
-          showEnterOnDevice={!this.state.waitingOnAudio && !this.props.entryDisallowed && !isMobileVR}
+          showEnterOnDevice={!this.state.waitingOnAudio && !this.props.entryDisallowed && !isMobileVR && false} // hard coded false, this entry mode not useful
           onEnterOnDevice={() => this.attemptLink()}
-          showSpectate={!this.state.waitingOnAudio && !this.props.entryDisallowed}
+          showSpectate={!this.state.waitingOnAudio && !this.props.entryDisallowed && false} // hard coded false, not possible to spectate.
           onSpectate={() => this.setState({ watching: true })}
           showOptions={this.props.hubChannel.canOrWillIfCreator("update_hub")}
           onOptions={() => {
@@ -1063,7 +1063,8 @@ class UIRoot extends Component {
 
     const streaming = this.state.isStreaming;
 
-    const showObjectList = enteredOrWatching;
+    const showObjectList = this.state.signedIn && enteredOrWatching;
+    const showPeopleList = this.state.signedIn && enteredOrWatching
 
     const streamer = getCurrentStreamer();
     const streamerName = streamer && streamer.displayName;
@@ -1348,10 +1349,12 @@ class UIRoot extends Component {
                             onClick={() => this.toggleSidebar("objects")}
                           />
                         )}
-                        <PeopleMenuButton
-                          active={this.state.sidebarId === "people"}
-                          onClick={() => this.toggleSidebar("people")}
-                        />
+                        {showPeopleList && (
+                          <PeopleMenuButton
+                            active={this.state.sidebarId === "people"}
+                            onClick={() => this.toggleSidebar("people")}
+                          />
+                        )}
                       </ContentMenu>
                     )}
                     {!entered && !streaming && !isMobile && streamerName && <SpectatingLabel name={streamerName} />}

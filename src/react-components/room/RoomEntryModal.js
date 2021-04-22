@@ -49,7 +49,7 @@ export function RoomEntryModal({
             <Button preset="accent4" onClick={onJoinRoom}>
               <EnterIcon />
               <span>
-                <FormattedMessage id="room-entry-modal.join-room-button" defaultMessage="Join Room" />
+                <FormattedMessage id="room-entry-modal.join-room-button" defaultMessage="Enter Virgils" />
               </span>
             </Button>
           )}
