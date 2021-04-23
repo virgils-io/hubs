@@ -1064,7 +1064,9 @@ class UIRoot extends Component {
     const streaming = this.state.isStreaming;
 
     const showObjectList = this.state.signedIn && enteredOrWatching;
-    const showPeopleList = this.state.signedIn && enteredOrWatching
+    const showPeopleList = this.state.signedIn;
+    const showChat = this.state.signedIn;
+    const showSignIn = false;
 
     const streamer = getCurrentStreamer();
     const streamerName = streamer && streamer.displayName;
@@ -1082,7 +1084,7 @@ class UIRoot extends Component {
           "You" +
           (this.state.signedIn ? ` (Signed in as: ${maskEmail(this.props.store.state.credentials.email)})` : ""),
         items: [
-          this.state.signedIn
+          showSignIn && this.state.signedIn
             ? {
                 id: "sign-out",
                 label: <FormattedMessage id="more-menu.sign-out" defaultMessage="Sign Out" />,
@@ -1542,7 +1544,9 @@ class UIRoot extends Component {
                         {this.props.hubChannel.can("spawn_emoji") && <ReactionPopoverContainer />}
                       </>
                     )}
-                    <ChatToolbarButtonContainer onClick={() => this.toggleSidebar("chat")} />
+                    {showChat && (
+                      <ChatToolbarButtonContainer onClick={() => this.toggleSidebar("chat")} />
+                    )}
                     {entered &&
                       isMobileVR && (
                         <ToolbarButton
