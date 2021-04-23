@@ -52,17 +52,21 @@
   --accent3-color-hover: #{theme.$green-hover};
   --accent3-color-pressed: #{theme.$green-pressed};
 
-  --accent4-color: #{theme.$blue};
-  --accent4-color-hover: #{theme.$blue-hover};
-  --accent4-color-pressed: #{theme.$blue-pressed};
+  // --accent4-color: #{theme.$blue};
+  // --accent4-color-hover: #{theme.$blue-hover};
+  // --accent4-color-pressed: #{theme.$blue-pressed};
+
+  --accent4-color: #{theme.$virgils-purple};
+  --accent4-color-hover: #{theme.$virgils-purple-hover};
+  --accent4-color-pressed: #{theme.$virgils-purple-pressed};
 
   --accent5-color: #{theme.$purple};
   --accent5-color-hover: #{theme.$purple-hover};
   --accent5-color-pressed: #{theme.$purple-pressed};
 
   --primary-color: #{theme.$virgils-purple};
-  --primary-color-hover: #{theme.$virgils-blue};
-  --primary-color-pressed: #{theme.$virgils-blue};
+  --primary-color-hover: #{theme.$virgils-purple-hover};
+  --primary-color-pressed: #{theme.$virgils-purple-pressed};
 
   --secondary-color: #{theme.$lightgrey};
   --secondary-color-hover: #{theme.$lightgrey-hover};
