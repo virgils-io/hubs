@@ -218,9 +218,9 @@ class LinkRoot extends Component {
                 />
               </div>
 
-              <div className={styles.enteredFooter}>
+              {/* <div className={styles.enteredFooter}>
                 {!this.state.isAlphaMode && <ToggleModeButton onClick={() => this.toggleMode()} />}
-              </div>
+              </div> */}
             </div>
 
             <div className={styles.keypad}>
