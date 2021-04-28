@@ -29,23 +29,6 @@ export function LoadingScreenContainer({ onLoaded, scene }) {
           defaultMessage: "heal your mind at home with Virgils"
         })
       }
-      // {
-      //   heading: intl.formatMessage({ id: "loading-screen.heading.whats-new", defaultMessage: "What's New?" }),
-      //   message: intl.formatMessage(
-      //     {
-      //       id: "loading-screen.message.whats-new",
-      //       defaultMessage: "You can now set the default locale in your preferences. <a>Read More</a>"
-      //     },
-      //     {
-      //       // eslint-disable-next-line react/display-name
-      //       a: chunks => (
-      //         <a href="/whats-new" target="_blank">
-      //           {chunks}
-      //         </a>
-      //       )
-      //     }
-      //   )
-      // }
     ],
     [intl]
   );
