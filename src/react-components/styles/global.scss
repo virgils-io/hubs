@@ -32,25 +32,41 @@
   --link-color-hover: #{theme.$virgils-purple-hover};
   --link-color-pressed: #{theme.$virgils-purple-pressed};
 
-  --accept-color: #{theme.$green};
-  --accept-color-hover: #{theme.$green-hover};
-  --accept-color-pressed: #{theme.$green-pressed};
+  // --accept-color: #{theme.$green};
+  // --accept-color-hover: #{theme.$green-hover};
+  // --accept-color-pressed: #{theme.$green-pressed};
+
+  --accept-color: #{theme.$virgils-purple};
+  --accept-color-hover: #{theme.$virgils-purple-hover};
+  --accept-color-pressed: #{theme.$virgils-purple-pressed};
 
   --cancel-color: #{theme.$red};
   --cancel-color-hover: #{theme.$red-hover};
   --cancel-color-pressed: #{theme.$red-pressed};
 
-  --accent1-color: #{theme.$red};
-  --accent1-color-hover: #{theme.$red-hover};
-  --accent1-color-pressed: #{theme.$red-pressed};
+  // --accent1-color: #{theme.$red};
+  // --accent1-color-hover: #{theme.$red-hover};
+  // --accent1-color-pressed: #{theme.$red-pressed};
 
-  --accent2-color: #{theme.$orange};
-  --accent2-color-hover: #{theme.$orange-hover};
-  --accent2-color-pressed: #{theme.$orange-pressed};
+  --accent1-color: #{theme.$virgils-purple};
+  --accent1-color-hover: #{theme.$virgils-purple-hover};
+  --accent1-color-pressed: #{theme.$virgils-purple-pressed};
 
-  --accent3-color: #{theme.$green};
-  --accent3-color-hover: #{theme.$green-hover};
-  --accent3-color-pressed: #{theme.$green-pressed};
+  // --accent2-color: #{theme.$orange};
+  // --accent2-color-hover: #{theme.$orange-hover};
+  // --accent2-color-pressed: #{theme.$orange-pressed};
+
+  --accent2-color: #{theme.$virgils-purple};
+  --accent2-color-hover: #{theme.$virgils-purple-hover};
+  --accent2-color-pressed: #{theme.$virgils-purple-pressed};
+
+  // --accent3-color: #{theme.$green};
+  // --accent3-color-hover: #{theme.$green-hover};
+  // --accent3-color-pressed: #{theme.$green-pressed};
+
+  --accent3-color: #{theme.$virgils-purple};
+  --accent3-color-hover: #{theme.$virgils-purple-hover};
+  --accent3-color-pressed: #{theme.$virgils-purple-pressed};
 
   // --accent4-color: #{theme.$blue};
   // --accent4-color-hover: #{theme.$blue-hover};
@@ -60,9 +76,13 @@
   --accent4-color-hover: #{theme.$virgils-purple-hover};
   --accent4-color-pressed: #{theme.$virgils-purple-pressed};
 
+  // --accent5-color: #{theme.$purple};
+  // --accent5-color-hover: #{theme.$purple-hover};
+  // --accent5-color-pressed: #{theme.$purple-pressed};
+
   --accent5-color: #{theme.$purple};
-  --accent5-color-hover: #{theme.$purple-hover};
-  --accent5-color-pressed: #{theme.$purple-pressed};
+  --accent5-color-hover: #{theme.$virgils-purple-hover};
+  --accent5-color-pressed: #{theme.$virgils-purple-pressed};
 
   --primary-color: #{theme.$virgils-purple};
   --primary-color-hover: #{theme.$virgils-purple-hover};
