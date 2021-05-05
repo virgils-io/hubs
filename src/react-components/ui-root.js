@@ -1148,10 +1148,10 @@ class UIRoot extends Component {
         label: <FormattedMessage id="more-menu.room" defaultMessage=" " />,
         items: [
           canShowRoomInfo && {
-            id: "room-info",
-            label: <FormattedMessage id="more-menu.room-info" defaultMessage="Room Info and Settings" />,
+            id: "room-info-settings",
+            label: <FormattedMessage id="more-menu.room-info-settings" defaultMessage="Room Settings" />,
             icon: HomeIcon,
-            onClick: () => this.setSidebar("room-info")
+            onClick: () => this.setSidebar("room-info-settings")
           },
           showInvite && (this.props.breakpoint === "sm" || this.props.breakpoint === "md") &&
             (this.props.hub.entry_mode !== "invite" || this.props.hubChannel.can("update_hub")) && {
@@ -1484,8 +1484,8 @@ class UIRoot extends Component {
                         <RoomSettingsSidebarContainer
                           room={this.props.hub}
                           hubChannel={this.props.hubChannel}
-                          showBackButton
-                          onClose={() => this.setSidebar("room-info")}
+                          // showBackButton
+                          onClose={() => this.setSidebar(null)}
                           onChangeScene={this.onChangeScene}
                         />
                       )}
