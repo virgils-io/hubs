@@ -40,9 +40,9 @@
   --accept-color-hover: #{theme.$virgils-purple-hover};
   --accept-color-pressed: #{theme.$virgils-purple-pressed};
 
-  --cancel-color: #{theme.$red};
-  --cancel-color-hover: #{theme.$red-hover};
-  --cancel-color-pressed: #{theme.$red-pressed};
+  --cancel-color: #{theme.$virgils-red};
+  --cancel-color-hover: #{theme.$virgils-red-hover};
+  --cancel-color-pressed: #{theme.$virgils-red-pressed};
 
   // --accent1-color: #{theme.$red};
   // --accent1-color-hover: #{theme.$red-hover};
@@ -80,7 +80,7 @@
   // --accent5-color-hover: #{theme.$purple-hover};
   // --accent5-color-pressed: #{theme.$purple-pressed};
 
-  --accent5-color: #{theme.$purple};
+  --accent5-color: #{theme.$virgils-purple};
   --accent5-color-hover: #{theme.$virgils-purple-hover};
   --accent5-color-pressed: #{theme.$virgils-purple-pressed};
 
