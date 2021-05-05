@@ -988,6 +988,7 @@ class UIRoot extends Component {
     if (this.props.showInterstitialPrompt) return this.renderInterstitialPrompt();
 
     const entered = this.state.entered;
+    const signedIn = this.state.signedIn;
     const watching = this.state.watching;
     const enteredOrWatching = entered || watching;
     const showRtcDebugPanel = this.props.store.state.preferences["showRtcDebugPanel"];
@@ -1065,7 +1066,8 @@ class UIRoot extends Component {
 
     const showObjectList = this.state.signedIn && enteredOrWatching;
     const showPeopleList = this.state.signedIn;
-    const showChat = this.state.signedIn;
+    const showChat = false;
+    const enableEmoji = false;
     // const showSignInOption = false; // Tried to wrap this.state.signedIn ? with showSignInOption. But not possible with current syntax
 
     const streamer = getCurrentStreamer();
@@ -1079,8 +1081,7 @@ class UIRoot extends Component {
     const isModerator = this.props.hubChannel && this.props.hubChannel.canOrWillIfCreator("kick_users") && !isMobileVR;
     const canSeeFavoriteRooms = false;
     const canShowRoomInfo = this.state.signedIn;
-    const showInvite = this.state.singedIn;
-    const showTip = false
+    // const showTip = false // Just commented out tip container 
 
     const moreMenu = [
       {
@@ -1153,7 +1154,7 @@ class UIRoot extends Component {
             icon: HomeIcon,
             onClick: () => this.setSidebar("room-info-settings")
           },
-          showInvite && (this.props.breakpoint === "sm" || this.props.breakpoint === "md") &&
+          (this.props.breakpoint === "sm" || this.props.breakpoint === "md") &&
             (this.props.hub.entry_mode !== "invite" || this.props.hubChannel.can("update_hub")) && {
               id: "invite",
               label: <FormattedMessage id="more-menu.invite" defaultMessage="Invite" />,
@@ -1505,11 +1506,17 @@ class UIRoot extends Component {
                 }
                 modal={this.state.dialog}
                 toolbarLeft={
-                  <InvitePopoverContainer
-                    hub={this.props.hub}
-                    hubChannel={this.props.hubChannel}
-                    scene={this.props.scene}
-                  />
+                  <>
+                    {signedIn && (
+                      <>
+                        <InvitePopoverContainer
+                          hub={this.props.hub}
+                          hubChannel={this.props.hubChannel}
+                          scene={this.props.scene}
+                        />
+                      </>
+                    )}
+                  </>
                 }
                 toolbarCenter={
                   <>
@@ -1546,7 +1553,7 @@ class UIRoot extends Component {
                           mediaSearchStore={this.props.mediaSearchStore}
                           showNonHistoriedDialog={this.showNonHistoriedDialog}
                         />
-                        {this.props.hubChannel.can("spawn_emoji") && <ReactionPopoverContainer />}
+                        {this.props.hubChannel.can("spawn_emoji") && enableEmoji && <ReactionPopoverContainer />}
                       </>
                     )}
                     {showChat && (
