@@ -76,7 +76,7 @@ export function RoomEntryModal({
                 <Button preset="transparent" className={styleUtils.showLg} onClick={onOptions}>
                   <SettingsIcon />
                   <span>
-                    <FormattedMessage id="room-entry-modal.options-button" defaultMessage="Options" />
+                    <FormattedMessage id="room-entry-modal.options-button" defaultMessage="Room Settings" />
                   </span>
                 </Button>
               </>
