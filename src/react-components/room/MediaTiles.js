@@ -203,7 +203,7 @@ export function MediaTile({ entry, processThumbnailUrl, onClick, onEdit, onShowS
           <PeopleIcon /> <span>{entry.member_count}</span>
         </div>
       )}
-      <div className={styles.tileActions}>
+      {/* <div className={styles.tileActions}>
         {entry.type === "avatar" && (
           <TileAction
             title={intl.formatMessage({ id: "media-tile.action.edit-avatar", defaultMessage: "Edit avatar" })}
@@ -269,7 +269,7 @@ export function MediaTile({ entry, processThumbnailUrl, onClick, onEdit, onShowS
               <HelpIcon />
             </TileAction>
           )}
-      </div>
+      </div> */}
     </BaseTile>
   );
 }
