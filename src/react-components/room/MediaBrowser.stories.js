@@ -250,7 +250,8 @@ const gif = {
   url: "https://media.tenor.com/videos/004424225acc15896c846f6ab3740ad0/mp4"
 };
 
-const mediaSources = ["poly", "sketchfab", "videos", "scenes", "avatars", "gifs", "images"];
+// const mediaSources = ["poly", "sketchfab", "videos", "scenes", "avatars", "gifs", "images"];
+const mediaSources = ["avatars", "scenes"];
 
 export const Favorites = () => (
   <MediaBrowser selectedSource={"favorites"}>
