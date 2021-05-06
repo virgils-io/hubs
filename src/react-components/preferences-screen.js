@@ -889,7 +889,7 @@ class PreferencesScreen extends Component {
 
     const availableThemes = [
       {
-        value: null,
+        value: "hubs-default",
         text: browserDefault
       }
     ];
@@ -921,7 +921,7 @@ class PreferencesScreen extends Component {
             max: 90,
             step: 5,
             digits: 0,
-            defaultNumber: 45
+            defaultNumber: 30
           },
           { key: "disableMovement", prefType: PREFERENCE_LIST_ITEM_TYPE.CHECK_BOX, defaultBool: false },
           { key: "disableBackwardsMovement", prefType: PREFERENCE_LIST_ITEM_TYPE.CHECK_BOX, defaultBool: false },
@@ -931,10 +931,10 @@ class PreferencesScreen extends Component {
             key: "movementSpeedModifier",
             prefType: PREFERENCE_LIST_ITEM_TYPE.NUMBER_WITH_RANGE,
             min: 0,
-            max: 2,
+            max: 0.5,
             step: 0.1,
             digits: 1,
-            defaultNumber: 1
+            defaultNumber: 0.4
           }
         ]
       ],
