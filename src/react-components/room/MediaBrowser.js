@@ -71,21 +71,22 @@ export function MediaBrowser({
               </h3>
             </>
           ) : (
-            <TextInputField
-              value={query}
-              onChange={onChangeQuery}
-              autoFocus={autoFocusSearch}
-              ref={searchInputRef}
-              placeholder={searchPlaceholder}
-              onKeyDown={onSearchKeyDown}
-              beforeInput={<SearchIcon className={styles.searchIcon} />}
-              afterInput={
-                <IconButton onClick={onClearSearch}>
-                  <CloseIcon height={16} width={16} />
-                </IconButton>
-              }
-              description={searchDescription}
-            />
+            <div></div>
+            // <TextInputField
+            //   value={query}
+            //   onChange={onChangeQuery}
+            //   autoFocus={autoFocusSearch}
+            //   ref={searchInputRef}
+            //   placeholder={searchPlaceholder}
+            //   onKeyDown={onSearchKeyDown}
+            //   beforeInput={<SearchIcon className={styles.searchIcon} />}
+            //   afterInput={
+            //     <IconButton onClick={onClearSearch}>
+            //       <CloseIcon height={16} width={16} />
+            //     </IconButton>
+            //   }
+            //   description={searchDescription}
+            // />
           )}
         </>
       }
