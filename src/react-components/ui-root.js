@@ -1079,6 +1079,7 @@ class UIRoot extends Component {
     const canCreateRoom = false; 
     const canCloseRoom = this.props.hubChannel && !!this.props.hubChannel.canOrWillIfCreator("close_hub");
     const isModerator = this.props.hubChannel && this.props.hubChannel.canOrWillIfCreator("kick_users") && !isMobileVR;
+    const canStream = false
     const canSeeFavoriteRooms = false;
     const canShowRoomInfo = this.state.signedIn;
     // const showTip = false // Just commented out tip container 
@@ -1149,10 +1150,10 @@ class UIRoot extends Component {
         label: <FormattedMessage id="more-menu.room" defaultMessage=" " />,
         items: [
           canShowRoomInfo && {
-            id: "room-info-settings",
-            label: <FormattedMessage id="more-menu.room-info-settings" defaultMessage="Room Settings" />,
+            id: "room-info",
+            label: <FormattedMessage id="more-menu.room-info" defaultMessage="Room Settings" />,
             icon: HomeIcon,
-            onClick: () => this.setSidebar("room-info-settings")
+            onClick: () => this.setSidebar("room-info")
           },
           (this.props.breakpoint === "sm" || this.props.breakpoint === "md") &&
             (this.props.hub.entry_mode !== "invite" || this.props.hubChannel.can("update_hub")) && {
@@ -1174,7 +1175,7 @@ class UIRoot extends Component {
           //       icon: StarOutlineIcon,
           //       onClick: () => this.toggleFavorited()
           //     },
-          isModerator &&
+          canStream && isModerator &&
             entered && {
               id: "streamer-mode",
               label: streaming ? (
@@ -1485,8 +1486,8 @@ class UIRoot extends Component {
                         <RoomSettingsSidebarContainer
                           room={this.props.hub}
                           hubChannel={this.props.hubChannel}
-                          // showBackButton
-                          onClose={() => this.setSidebar(null)}
+                          showBackButton
+                          onClose={() => this.setSidebar("room-info")}
                           onChangeScene={this.onChangeScene}
                         />
                       )}
