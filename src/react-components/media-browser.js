@@ -504,14 +504,14 @@ class MediaBrowserContainer extends Component {
         entries.length > 0 ||
         !showEmptyStringOnNoResult ? (
           <>
-            {urlSource === "avatars" && (
+            {/* {urlSource === "avatars" && (
               <CreateTile
                 type="avatar"
                 onClick={this.onCreateAvatar}
                 label={<FormattedMessage id="media-browser.create-avatar" defaultMessage="Create Avatar" />}
               />
-            )}
-            {urlSource === "scenes" &&
+            )} */}
+            {/* {urlSource === "scenes" &&
               configs.feature("enable_spoke") && (
                 <CreateTile
                   as="a"
@@ -527,7 +527,7 @@ class MediaBrowserContainer extends Component {
                     />
                   }
                 />
-              )}
+              )} */}
             {entries.map((entry, idx) => {
               const isAvatar = entry.type === "avatar" || entry.type === "avatar_listing";
               const isScene = entry.type === "scene" || entry.type === "scene_listing";
