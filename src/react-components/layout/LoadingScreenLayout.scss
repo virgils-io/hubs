@@ -12,6 +12,8 @@
   bottom: 0;
   top: 0;
   background: theme.$loading-screen-background;
+  animation: gradient 10s ease infinite;
+	background-size: 400% 400%;
 
   font-size: theme.$font-size-sm;
 
@@ -19,6 +21,18 @@
     font-size: theme.$font-size-md;
   }
 }
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+};
 
 :local(.center) {
   flex-grow: 0;
