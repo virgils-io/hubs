@@ -65,7 +65,7 @@ const DEFAULT_FACETS = {
     { text: "Transport", params: { filter: "transport" } }
   ],
   avatars: [
-    { text: "Select Your Avatar", params: { filter: "featured" } }
+    { text: "Featured", params: { filter: "featured" } }
     // { text: "My Avatars", params: { filter: "my-avatars" } },
     // { text: "Newest", params: { filter: "" } }
   ],
@@ -469,7 +469,7 @@ class MediaBrowserContainer extends Component {
           }
         }}
         onClearSearch={() => this.handleQueryUpdated("", true)}
-        mediaSources={urlSource === "favorites" ? undefined : SOURCES}
+        mediaSources={urlSource === "favorites" ? undefined : SOURCES} // SOURCES is an array defined in src/storage/media-seach-store.js; Paired down the list to just avatars.
         selectedSource={urlSource}
         onSelectSource={this.handleSourceClicked}
         activeFilter={activeFilter}
@@ -504,15 +504,15 @@ class MediaBrowserContainer extends Component {
         entries.length > 0 ||
         !showEmptyStringOnNoResult ? (
           <>
-            {/* {urlSource === "avatars" && (
+            {urlSource === "avatars" && this.props.hubChannel.signedIn && (
               <CreateTile
                 type="avatar"
                 onClick={this.onCreateAvatar}
                 label={<FormattedMessage id="media-browser.create-avatar" defaultMessage="Create Avatar" />}
               />
-            )} */}
-            {/* {urlSource === "scenes" &&
-              configs.feature("enable_spoke") && (
+            )}
+            {urlSource === "scenes" &&
+              configs.feature("enable_spoke") && this.props.hubChannel.signedIn && (
                 <CreateTile
                   as="a"
                   href="/spoke/new"
@@ -527,7 +527,7 @@ class MediaBrowserContainer extends Component {
                     />
                   }
                 />
-              )} */}
+              )}
             {entries.map((entry, idx) => {
               const isAvatar = entry.type === "avatar" || entry.type === "avatar_listing";
               const isScene = entry.type === "scene" || entry.type === "scene_listing";
