@@ -12,6 +12,7 @@ import { ReactComponent as SearchIcon } from "../icons/Search.svg";
 import { ReactComponent as HelpIcon } from "../icons/Help.svg";
 import { ReactComponent as ExternalLinkIcon } from "../icons/ExternalLink.svg";
 
+
 const PUBLISHER_FOR_ENTRY_TYPE = {
   sketchfab_model: "Sketchfab",
   poly_model: "Google Poly",
@@ -135,6 +136,7 @@ export function MediaTile({ entry, processThumbnailUrl, onClick, onEdit, onShowS
   const publisherName =
     (entry.attributions && entry.attributions.publisher && entry.attributions.publisher.name) ||
     PUBLISHER_FOR_ENTRY_TYPE[entry.type];
+  const signedIn = window.APP.store.state.credentials?.token;
 
   const [thumbnailUrl, thumbnailWidth, thumbnailHeight] = useThumbnail(entry, processThumbnailUrl);
 
@@ -203,8 +205,8 @@ export function MediaTile({ entry, processThumbnailUrl, onClick, onEdit, onShowS
           <PeopleIcon /> <span>{entry.member_count}</span>
         </div>
       )}
-      {/* <div className={styles.tileActions}>
-        {entry.type === "avatar" && (
+      <div className={styles.tileActions}>
+        {entry.type === "avatar" && signedIn && (
           <TileAction
             title={intl.formatMessage({ id: "media-tile.action.edit-avatar", defaultMessage: "Edit avatar" })}
             onClick={onEdit}
@@ -213,7 +215,7 @@ export function MediaTile({ entry, processThumbnailUrl, onClick, onEdit, onShowS
           </TileAction>
         )}
         {entry.type === "scene" &&
-          entry.project_id && (
+          entry.project_id && signedIn && (
             <TileAction
               onClick={onEdit}
               title={intl.formatMessage({ id: "media-tile.action.edit-scene", defaultMessage: "Edit scene" })}
@@ -221,7 +223,7 @@ export function MediaTile({ entry, processThumbnailUrl, onClick, onEdit, onShowS
               <PenIcon />
             </TileAction>
           )}
-        {entry.type === "avatar_listing" && (
+        {/* {entry.type === "avatar_listing" && (
           <TileAction
             title={intl.formatMessage({
               id: "media-tile.action.show-similar-avatars",
@@ -268,8 +270,8 @@ export function MediaTile({ entry, processThumbnailUrl, onClick, onEdit, onShowS
             >
               <HelpIcon />
             </TileAction>
-          )}
-      </div> */}
+          )} */}
+      </div>
     </BaseTile>
   );
 }
