@@ -5,6 +5,7 @@
 // Theme CSS Variables
 // Injected theme will overwrite these defaults
 :root {
+  // --font-family-default: Roboto;
   --font-family-default: 'Poppins', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   --font-family-monospace: Consolas, "Andale Mono WT", "Andale Mono", "Lucida Console", "Lucida Sans Typewriter", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Liberation Mono", "Nimbus Mono L", Monaco, "Courier New", Courier, monospace;
 
@@ -27,41 +28,65 @@
   --text6-color-hover: var(--text6-color);
   --text6-color-pressed: var(--text6-color);
 
-  --link-color: #{theme.$blue};
-  --link-color-hover: #{theme.$blue-hover};
-  --link-color-pressed: #{theme.$blue-pressed};
+  --link-color: #{theme.$virgils-purple};
+  --link-color-hover: #{theme.$virgils-purple-hover};
+  --link-color-pressed: #{theme.$virgils-purple-pressed};
 
-  --accept-color: #{theme.$green};
-  --accept-color-hover: #{theme.$green-hover};
-  --accept-color-pressed: #{theme.$green-pressed};
+  // --accept-color: #{theme.$green};
+  // --accept-color-hover: #{theme.$green-hover};
+  // --accept-color-pressed: #{theme.$green-pressed};
 
-  --cancel-color: #{theme.$red};
-  --cancel-color-hover: #{theme.$red-hover};
-  --cancel-color-pressed: #{theme.$red-pressed};
+  --accept-color: #{theme.$virgils-purple};
+  --accept-color-hover: #{theme.$virgils-purple-hover};
+  --accept-color-pressed: #{theme.$virgils-purple-pressed};
 
-  --accent1-color: #{theme.$red};
-  --accent1-color-hover: #{theme.$red-hover};
-  --accent1-color-pressed: #{theme.$red-pressed};
+  --cancel-color: #{theme.$virgils-red};
+  --cancel-color-hover: #{theme.$virgils-red-hover};
+  --cancel-color-pressed: #{theme.$virgils-red-pressed};
 
-  --accent2-color: #{theme.$orange};
-  --accent2-color-hover: #{theme.$orange-hover};
-  --accent2-color-pressed: #{theme.$orange-pressed};
+  // --accent1-color: #{theme.$red};
+  // --accent1-color-hover: #{theme.$red-hover};
+  // --accent1-color-pressed: #{theme.$red-pressed};
 
-  --accent3-color: #{theme.$green};
-  --accent3-color-hover: #{theme.$green-hover};
-  --accent3-color-pressed: #{theme.$green-pressed};
+  --accent1-color: #{theme.$virgils-purple};
+  --accent1-color-hover: #{theme.$virgils-purple-hover};
+  --accent1-color-pressed: #{theme.$virgils-purple-pressed};
 
-  --accent4-color: #{theme.$blue};
-  --accent4-color-hover: #{theme.$blue-hover};
-  --accent4-color-pressed: #{theme.$blue-pressed};
+  // --accent2-color: #{theme.$orange};
+  // --accent2-color-hover: #{theme.$orange-hover};
+  // --accent2-color-pressed: #{theme.$orange-pressed};
 
-  --accent5-color: #{theme.$purple};
-  --accent5-color-hover: #{theme.$purple-hover};
-  --accent5-color-pressed: #{theme.$purple-pressed};
+  --accent2-color: #{theme.$virgils-purple};
+  --accent2-color-hover: #{theme.$virgils-purple-hover};
+  --accent2-color-pressed: #{theme.$virgils-purple-pressed};
 
-  --primary-color: #{theme.$blue};
-  --primary-color-hover: #{theme.$blue-hover};
-  --primary-color-pressed: #{theme.$blue-pressed};
+  // --accent3-color: #{theme.$green};
+  // --accent3-color-hover: #{theme.$green-hover};
+  // --accent3-color-pressed: #{theme.$green-pressed};
+
+  --accent3-color: #{theme.$virgils-purple};
+  --accent3-color-hover: #{theme.$virgils-purple-hover};
+  --accent3-color-pressed: #{theme.$virgils-purple-pressed};
+
+  // --accent4-color: #{theme.$blue};
+  // --accent4-color-hover: #{theme.$blue-hover};
+  // --accent4-color-pressed: #{theme.$blue-pressed};
+
+  --accent4-color: #{theme.$virgils-purple};
+  --accent4-color-hover: #{theme.$virgils-purple-hover};
+  --accent4-color-pressed: #{theme.$virgils-purple-pressed};
+
+  // --accent5-color: #{theme.$purple};
+  // --accent5-color-hover: #{theme.$purple-hover};
+  // --accent5-color-pressed: #{theme.$purple-pressed};
+
+  --accent5-color: #{theme.$virgils-purple};
+  --accent5-color-hover: #{theme.$virgils-purple-hover};
+  --accent5-color-pressed: #{theme.$virgils-purple-pressed};
+
+  --primary-color: #{theme.$virgils-purple};
+  --primary-color-hover: #{theme.$virgils-purple-hover};
+  --primary-color-pressed: #{theme.$virgils-purple-pressed};
 
   --secondary-color: #{theme.$lightgrey};
   --secondary-color-hover: #{theme.$lightgrey-hover};
@@ -72,7 +97,7 @@
   --background3-color: #{theme.$lightgrey};
   --background4-color: #{theme.$grey};
 
-  --loading-screen-background: radial-gradient(50% 50% at 50% 50%, #FFFFFF 0%, #EEEEEE 100%);
+  --loading-screen-background: linear-gradient(-45deg, #bb7a7a, #7889A2, #91869F);
 
   --border1-color: #{theme.$lightgrey};
   --border2-color: #{theme.$grey};

@@ -115,15 +115,17 @@ AFRAME.registerComponent("emoji-hud", {
   })(),
 
   play() {
-    this.el.sceneEl.addEventListener("stateadded", this._onFrozen);
-    this.el.sceneEl.addEventListener("stateremoved", this._onThaw);
-    this._updateOffset();
-  },
-
-  pause() {
+  //   this.el.sceneEl.addEventListener("stateadded", this._onFrozen);
+  //   this.el.sceneEl.addEventListener("stateremoved", this._onThaw);
+  //   this._updateOffset();
     this.el.sceneEl.removeEventListener("stateadded", this._onFrozen);
     this.el.sceneEl.removeEventListener("stateremoved", this._onThaw);
-  },
+  }, 
+
+  // pause() {
+  //   this.el.sceneEl.removeEventListener("stateadded", this._onFrozen);
+  //   this.el.sceneEl.removeEventListener("stateremoved", this._onThaw);
+  // },
 
   _onFrozen(e) {
     if (e.detail === "frozen") {

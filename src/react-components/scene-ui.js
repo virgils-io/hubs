@@ -268,12 +268,12 @@ class SceneUI extends Component {
                 )
               )}
             </IfFeature>
-            <a href={tweetLink} rel="noopener noreferrer" target="_blank" className={styles.tweetButton}>
+            {/* <a href={tweetLink} rel="noopener noreferrer" target="_blank" className={styles.tweetButton}>
               <img src="../assets/images/twitter.svg" />
               <div>
                 <FormattedMessage id="scene-page.tweet-button" defaultMessage="Share on Twitter" />
               </div>
-            </a>
+            </a> */}
           </div>
         </div>
         <div className={styles.info}>

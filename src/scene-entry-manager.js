@@ -123,6 +123,13 @@ export default class SceneEntryManager {
 
     this.scene.addState("entered");
 
+    // if (!this.hubChannel.signedIn) {
+    //     this.scene.emit("action_toggle_ui");
+    // }
+    // if (!this.hubChannel.signedIn && this._entered) {
+    //     this.scene.emit("action_toggle_ui");
+    // }
+
     if (muteOnEntry) {
       this.scene.emit("action_mute");
     }

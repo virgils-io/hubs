@@ -169,7 +169,7 @@ class LinkRoot extends Component {
       <WrappedIntlProvider>
         <div className={styles.link}>
           <div className={styles.linkContents}>
-            <a className={styles.logo} href="/">
+            <a className={styles.logo} href="https://virgils.io">
               <img
                 src={configs.image("logo")}
                 alt={<FormattedMessage id="link-page.logo-alt" defaultMessage="Logo" />}
@@ -218,9 +218,9 @@ class LinkRoot extends Component {
                 />
               </div>
 
-              <div className={styles.enteredFooter}>
+              {/* <div className={styles.enteredFooter}>
                 {!this.state.isAlphaMode && <ToggleModeButton onClick={() => this.toggleMode()} />}
-              </div>
+              </div> */}
             </div>
 
             <div className={styles.keypad}>
@@ -284,11 +284,11 @@ class LinkRoot extends Component {
                 </div>
               )}
             </div>
-            <div className={styles.createLink}>
+            {/* <div className={styles.createLink}>
               <a href="/">
                 <FormattedMessage id="link-page.create-room-button" defaultMessage="Create a new room" />
               </a>
-            </div>
+            </div> */}
           </div>
         </div>
       </WrappedIntlProvider>

@@ -114,12 +114,12 @@ export const keyboardMouseUserBindings = addSetsToBindings({
     },
     {
       src: { value: paths.device.keyboard.key("Tab") },
-      dest: { value: paths.actions.toggleFreeze },
+      dest: { value: paths.actions.toggleFreeze }, // this is turned off in freeze-controller.js
       xform: xforms.rising
     },
     {
       src: { value: paths.device.keyboard.key(" ") },
-      dest: { value: paths.actions.ensureFrozen },
+      dest: { value: paths.actions.ensureFrozen }, // emoji is controlled in emoji-hud.js & removed hide a frame object in hub.html & remove name tags in player-info.js
       xform: xforms.copy
     },
     {
@@ -150,7 +150,7 @@ export const keyboardMouseUserBindings = addSetsToBindings({
     },
     {
       src: { value: paths.device.keyboard.key("c") },
-      dest: { value: paths.actions.toggleCamera },
+      dest: { value: paths.actions.toggleCamera }, // this is turned off in ui-hotkeys.js
       xform: xforms.rising
     },
     {

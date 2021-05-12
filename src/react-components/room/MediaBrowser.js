@@ -71,21 +71,22 @@ export function MediaBrowser({
               </h3>
             </>
           ) : (
-            <TextInputField
-              value={query}
-              onChange={onChangeQuery}
-              autoFocus={autoFocusSearch}
-              ref={searchInputRef}
-              placeholder={searchPlaceholder}
-              onKeyDown={onSearchKeyDown}
-              beforeInput={<SearchIcon className={styles.searchIcon} />}
-              afterInput={
-                <IconButton onClick={onClearSearch}>
-                  <CloseIcon height={16} width={16} />
-                </IconButton>
-              }
-              description={searchDescription}
-            />
+            <div></div>
+            // <TextInputField
+            //   value={query}
+            //   onChange={onChangeQuery}
+            //   autoFocus={autoFocusSearch}
+            //   ref={searchInputRef}
+            //   placeholder={searchPlaceholder}
+            //   onKeyDown={onSearchKeyDown}
+            //   beforeInput={<SearchIcon className={styles.searchIcon} />}
+            //   afterInput={
+            //     <IconButton onClick={onClearSearch}>
+            //       <CloseIcon height={16} width={16} />
+            //     </IconButton>
+            //   }
+            //   description={searchDescription}
+            // />
           )}
         </>
       }
@@ -94,7 +95,7 @@ export function MediaBrowser({
       {mediaSources && (
         <div className={styles.buttonNav}>
           {mediaSources.map(source => (
-            <Button
+              <Button
               sm
               key={source}
               preset={selectedSource === source ? "primary" : "transparent"}
@@ -105,7 +106,7 @@ export function MediaBrowser({
           ))}
         </div>
       )}
-      {facets && (
+      {/* {facets && (
         <div className={classNames(styles.buttonNav, styles.facetsNav)}>
           {facets.map((facet, i) => (
             <Button
@@ -118,7 +119,7 @@ export function MediaBrowser({
             </Button>
           ))}
         </div>
-      )}
+      )} */}
       <div className={styles.content}>
         <Column grow ref={browserRef}>
           {children ? (

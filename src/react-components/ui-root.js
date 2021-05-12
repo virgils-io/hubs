@@ -114,6 +114,7 @@ const AUTO_EXIT_TIMER_SECONDS = 10;
 
 class UIRoot extends Component {
   willCompileAndUploadMaterials = false;
+  // firstTimeEnteredHid2dHud = false;
 
   static propTypes = {
     enterScene: PropTypes.func,
@@ -198,7 +199,7 @@ class UIRoot extends Component {
     sidebarId: null,
     presenceCount: 0
   };
-
+  
   constructor(props) {
     super(props);
 
@@ -375,7 +376,7 @@ class UIRoot extends Component {
     window.removeEventListener("idle_detected", this.onIdleDetected);
     window.removeEventListener("activity_detected", this.onActivityDetected);
   }
-
+  
   storeUpdated = () => {
     this.forceUpdate();
   };
@@ -807,9 +808,9 @@ class UIRoot extends Component {
               this.handleForceEntry();
             }
           }}
-          showEnterOnDevice={!this.state.waitingOnAudio && !this.props.entryDisallowed && !isMobileVR}
+          showEnterOnDevice={!this.state.waitingOnAudio && !this.props.entryDisallowed && !isMobileVR && false} // hard coded false, this entry mode not useful
           onEnterOnDevice={() => this.attemptLink()}
-          showSpectate={!this.state.waitingOnAudio && !this.props.entryDisallowed}
+          showSpectate={!this.state.waitingOnAudio && !this.props.entryDisallowed && false} // hard coded false, not possible to spectate.
           onSpectate={() => this.setState({ watching: true })}
           showOptions={this.props.hubChannel.canOrWillIfCreator("update_hub")}
           onOptions={() => {
@@ -942,7 +943,7 @@ class UIRoot extends Component {
           <RoomLayoutContainer
             scene={this.props.scene}
             store={this.props.store}
-            viewport={!this.state.hideUITip && <FullscreenTip onDismiss={() => this.setState({ hideUITip: true })} />}
+            // viewport={!this.state.hideUITip && <FullscreenTip onDismiss={() => this.setState({ hideUITip: true })} />}
           />
         </div>
       );
@@ -993,6 +994,7 @@ class UIRoot extends Component {
     if (this.props.showInterstitialPrompt) return this.renderInterstitialPrompt();
 
     const entered = this.state.entered;
+    const signedIn = this.state.signedIn;
     const watching = this.state.watching;
     const enteredOrWatching = entered || watching;
     const showRtcDebugPanel = this.props.store.state.preferences["showRtcDebugPanel"];
@@ -1068,16 +1070,25 @@ class UIRoot extends Component {
 
     const streaming = this.state.isStreaming;
 
-    const showObjectList = enteredOrWatching;
+    const showObjectList = this.state.signedIn && enteredOrWatching;
+    const showPeopleList = this.state.signedIn;
+    const showChat = false;
+    const enableEmoji = false;
+    // const showSignInOption = false; // Tried to wrap this.state.signedIn ? with showSignInOption. But not possible with current syntax
 
     const streamer = getCurrentStreamer();
     const streamerName = streamer && streamer.displayName;
 
     const renderEntryFlow = (!enteredOrWatching && this.props.hub) || this.isWaitingForAutoExit();
 
-    const canCreateRoom = !configs.feature("disable_room_creation") || configs.isAdmin;
+    // const canCreateRoom = !configs.feature("disable_room_creation") || configs.isAdmin; 
+    const canCreateRoom = false; 
     const canCloseRoom = this.props.hubChannel && !!this.props.hubChannel.canOrWillIfCreator("close_hub");
     const isModerator = this.props.hubChannel && this.props.hubChannel.canOrWillIfCreator("kick_users") && !isMobileVR;
+    const canStream = false
+    const canSeeFavoriteRooms = false;
+    const canShowRoomInfo = this.state.signedIn;
+    // const showTip = false // Just commented out tip container 
 
     const moreMenu = [
       {
@@ -1086,22 +1097,22 @@ class UIRoot extends Component {
           "You" +
           (this.state.signedIn ? ` (Signed in as: ${maskEmail(this.props.store.state.credentials.email)})` : ""),
         items: [
-          this.state.signedIn
-            ? {
-                id: "sign-out",
-                label: <FormattedMessage id="more-menu.sign-out" defaultMessage="Sign Out" />,
-                icon: LeaveIcon,
-                onClick: async () => {
-                  await this.props.authChannel.signOut(this.props.hubChannel);
-                  this.setState({ signedIn: false });
-                }
-              }
-            : {
-                id: "sign-in",
-                label: <FormattedMessage id="more-menu.sign-in" defaultMessage="Sign In" />,
-                icon: EnterIcon,
-                onClick: () => this.showContextualSignInDialog()
-              },
+          // this.state.signedIn
+          //   ? {
+          //       id: "sign-out",
+          //       label: <FormattedMessage id="more-menu.sign-out" defaultMessage="Sign Out" />,
+          //       icon: LeaveIcon,
+          //       onClick: async () => {
+          //         await this.props.authChannel.signOut(this.props.hubChannel);
+          //         this.setState({ signedIn: false });
+          //       }
+          //     }
+          //   : {
+          //       id: "sign-in",
+          //       label: <FormattedMessage id="more-menu.sign-in" defaultMessage="Sign In" />,
+          //       icon: EnterIcon,
+          //       onClick: () => this.showContextualSignInDialog()
+          //     },
           canCreateRoom && {
             id: "create-room",
             label: <FormattedMessage id="more-menu.create-room" defaultMessage="Create Room" />,
@@ -1114,11 +1125,11 @@ class UIRoot extends Component {
           },
           {
             id: "user-profile",
-            label: <FormattedMessage id="more-menu.profile" defaultMessage="Change Name & Avatar" />,
+            label: <FormattedMessage id="more-menu.profile" defaultMessage="Change Avatar" />,
             icon: AvatarIcon,
             onClick: () => this.setSidebar("profile")
           },
-          {
+          canSeeFavoriteRooms && {
             id: "favorite-rooms",
             label: <FormattedMessage id="more-menu.favorite-rooms" defaultMessage="Favorite Rooms" />,
             icon: FavoritesIcon,
@@ -1142,11 +1153,11 @@ class UIRoot extends Component {
       },
       {
         id: "room",
-        label: <FormattedMessage id="more-menu.room" defaultMessage="Room" />,
+        label: <FormattedMessage id="more-menu.room" defaultMessage=" " />,
         items: [
-          {
+          canShowRoomInfo && {
             id: "room-info",
-            label: <FormattedMessage id="more-menu.room-info" defaultMessage="Room Info and Settings" />,
+            label: <FormattedMessage id="more-menu.room-info" defaultMessage="Room Settings" />,
             icon: HomeIcon,
             onClick: () => this.setSidebar("room-info")
           },
@@ -1157,20 +1168,20 @@ class UIRoot extends Component {
               icon: InviteIcon,
               onClick: () => this.props.scene.emit("action_invite")
             },
-          this.isFavorited()
-            ? {
-                id: "unfavorite-room",
-                label: <FormattedMessage id="more-menu.unfavorite-room" defaultMessage="Unfavorite Room" />,
-                icon: StarIcon,
-                onClick: () => this.toggleFavorited()
-              }
-            : {
-                id: "favorite-room",
-                label: <FormattedMessage id="more-menu.favorite-room" defaultMessage="Favorite Room" />,
-                icon: StarOutlineIcon,
-                onClick: () => this.toggleFavorited()
-              },
-          isModerator &&
+          // this.isFavorited()
+          //   ? {
+          //       id: "unfavorite-room",
+          //       label: <FormattedMessage id="more-menu.unfavorite-room" defaultMessage="Unfavorite Room" />,
+          //       icon: StarIcon,
+          //       onClick: () => this.toggleFavorited()
+          //     }
+          //   : {
+          //       id: "favorite-room",
+          //       label: <FormattedMessage id="more-menu.favorite-room" defaultMessage="Favorite Room" />,
+          //       icon: StarOutlineIcon,
+          //       onClick: () => this.toggleFavorited()
+          //     },
+          canStream && isModerator &&
             entered && {
               id: "streamer-mode",
               label: streaming ? (
@@ -1212,61 +1223,61 @@ class UIRoot extends Component {
               )
           }
         ].filter(item => item)
-      },
-      {
-        id: "support",
-        label: <FormattedMessage id="more-menu.support" defaultMessage="Support" />,
-        items: [
-          configs.feature("show_community_link") && {
-            id: "community",
-            label: <FormattedMessage id="more-menu.community" defaultMessage="Community" />,
-            icon: DiscordIcon,
-            href: configs.link("community", "https://discord.gg/dFJncWwHun")
-          },
-          configs.feature("show_issue_report_link") && {
-            id: "report-issue",
-            label: <FormattedMessage id="more-menu.report-issue" defaultMessage="Report Issue" />,
-            icon: WarningCircleIcon,
-            href: configs.link("issue_report", "https://hubs.mozilla.com/docs/help.html")
-          },
-          entered && {
-            id: "start-tour",
-            label: <FormattedMessage id="more-menu.start-tour" defaultMessage="Start Tour" />,
-            icon: SupportIcon,
-            onClick: () => this.props.scene.systems.tips.resetTips()
-          },
-          configs.feature("show_docs_link") && {
-            id: "help",
-            label: <FormattedMessage id="more-menu.help" defaultMessage="Help" />,
-            icon: SupportIcon,
-            href: configs.link("docs", "https://hubs.mozilla.com/docs")
-          },
-          configs.feature("show_controls_link") && {
-            id: "controls",
-            label: <FormattedMessage id="more-menu.controls" defaultMessage="Controls" />,
-            icon: SupportIcon,
-            href: configs.link("controls", "https://hubs.mozilla.com/docs/hubs-controls.html")
-          },
-          configs.feature("show_whats_new_link") && {
-            id: "whats-new",
-            label: <FormattedMessage id="more-menu.whats-new" defaultMessage="What's New" />,
-            icon: SupportIcon,
-            href: "/whats-new"
-          },
-          configs.feature("show_terms") && {
-            id: "tos",
-            label: <FormattedMessage id="more-menu.tos" defaultMessage="Terms of Service" />,
-            icon: TextDocumentIcon,
-            href: configs.link("terms_of_use", "https://github.com/mozilla/hubs/blob/master/TERMS.md")
-          },
-          configs.feature("show_privacy") && {
-            id: "privacy",
-            label: <FormattedMessage id="more-menu.privacy" defaultMessage="Privacy Notice" />,
-            icon: ShieldIcon,
-            href: configs.link("privacy_notice", "https://github.com/mozilla/hubs/blob/master/PRIVACY.md")
-          }
-        ].filter(item => item)
       }
+      // {
+      //   id: "support",
+      //   label: <FormattedMessage id="more-menu.support" defaultMessage="Support" />,
+      //   items: [
+      //     configs.feature("show_community_link") && {
+      //       id: "community",
+      //       label: <FormattedMessage id="more-menu.community" defaultMessage="Community" />,
+      //       icon: DiscordIcon,
+      //       href: configs.link("community", "https://discord.gg/dFJncWwHun")
+      //     },
+      //     configs.feature("show_issue_report_link") && {
+      //       id: "report-issue",
+      //       label: <FormattedMessage id="more-menu.report-issue" defaultMessage="Report Issue" />,
+      //       icon: WarningCircleIcon,
+      //       href: configs.link("issue_report", "https://hubs.mozilla.com/docs/help.html")
+      //     },
+      //     entered && {
+      //       id: "start-tour",
+      //       label: <FormattedMessage id="more-menu.start-tour" defaultMessage="Start Tour" />,
+      //       icon: SupportIcon,
+      //       onClick: () => this.props.scene.systems.tips.resetTips()
+      //     },
+      //     configs.feature("show_docs_link") && {
+      //       id: "help",
+      //       label: <FormattedMessage id="more-menu.help" defaultMessage="Help" />,
+      //       icon: SupportIcon,
+      //       href: configs.link("docs", "https://hubs.mozilla.com/docs")
+      //     },
+      //     configs.feature("show_controls_link") && {
+      //       id: "controls",
+      //       label: <FormattedMessage id="more-menu.controls" defaultMessage="Controls" />,
+      //       icon: SupportIcon,
+      //       href: configs.link("controls", "https://hubs.mozilla.com/docs/hubs-controls.html")
+      //     },
+      //     configs.feature("show_whats_new_link") && {
+      //       id: "whats-new",
+      //       label: <FormattedMessage id="more-menu.whats-new" defaultMessage="What's New" />,
+      //       icon: SupportIcon,
+      //       href: "/whats-new"
+      //     },
+      //     configs.feature("show_terms") && {
+      //       id: "tos",
+      //       label: <FormattedMessage id="more-menu.tos" defaultMessage="Terms of Service" />,
+      //       icon: TextDocumentIcon,
+      //       href: configs.link("terms_of_use", "https://github.com/mozilla/hubs/blob/master/TERMS.md")
+      //     },
+      //     configs.feature("show_privacy") && {
+      //       id: "privacy",
+      //       label: <FormattedMessage id="more-menu.privacy" defaultMessage="Privacy Notice" />,
+      //       icon: ShieldIcon,
+      //       href: configs.link("privacy_notice", "https://github.com/mozilla/hubs/blob/master/PRIVACY.md")
+      //     }
+      //   ].filter(item => item)
+      // }
     ];
 
     return (
@@ -1384,7 +1395,7 @@ class UIRoot extends Component {
                           onViewProfile={sessionId => this.setSidebar("user", { selectedUserId: sessionId })}
                         />
                       )}
-                    <TipContainer
+                    {/* {showTip && <TipContainer
                       hide={this.props.activeObject}
                       inLobby={watching}
                       inRoom={entered}
@@ -1394,7 +1405,7 @@ class UIRoot extends Component {
                       presences={this.props.presences}
                       scene={this.props.scene}
                       store={this.props.store}
-                    />
+                    />} */}
                     {showRtcDebugPanel && (
                       <RTCDebugPanel
                         history={this.props.history}
@@ -1501,11 +1512,17 @@ class UIRoot extends Component {
                 }
                 modal={this.state.dialog}
                 toolbarLeft={
-                  <InvitePopoverContainer
-                    hub={this.props.hub}
-                    hubChannel={this.props.hubChannel}
-                    scene={this.props.scene}
-                  />
+                  <>
+                    {signedIn && (
+                      <>
+                        <InvitePopoverContainer
+                          hub={this.props.hub}
+                          hubChannel={this.props.hubChannel}
+                          scene={this.props.scene}
+                        />
+                      </>
+                    )}
+                  </>
                 }
                 toolbarCenter={
                   <>
@@ -1542,10 +1559,12 @@ class UIRoot extends Component {
                           mediaSearchStore={this.props.mediaSearchStore}
                           showNonHistoriedDialog={this.showNonHistoriedDialog}
                         />
-                        {this.props.hubChannel.can("spawn_emoji") && <ReactionPopoverContainer />}
+                        {this.props.hubChannel.can("spawn_emoji") && enableEmoji && <ReactionPopoverContainer />}
                       </>
                     )}
-                    <ChatToolbarButtonContainer onClick={() => this.toggleSidebar("chat")} />
+                    {showChat && (
+                      <ChatToolbarButtonContainer onClick={() => this.toggleSidebar("chat")} />
+                    )}
                     {entered &&
                       isMobileVR && (
                         <ToolbarButton

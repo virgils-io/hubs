@@ -49,7 +49,7 @@ AFRAME.registerComponent("vr-mode-toggle-playing", {
   play() {
     this.updateComponentState();
     this.el.sceneEl.addEventListener("enter-vr", this.updateComponentState);
-    this.el.sceneEl.addEventListener("exit-vr", this.updateComponentState);
+    this.el.sceneEl.addEventListener("exit-vr", this.updateComponentState);  
   },
 
   pause() {

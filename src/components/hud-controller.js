@@ -76,19 +76,17 @@ AFRAME.registerComponent("hud-controller", {
       hud.rotation.z = 0;
     }
 
-    hud.visible =
-      (!hudOutOfView || forceHudVisible) &&
-      this.el.sceneEl.systems["hubs-systems"].cameraSystem.mode === CAMERA_MODE_FIRST_PERSON;
+    hud.visible = false;
     hud.position.y = (this.isYLocked ? this.lockedHeadPositionY : head.position.y) + offset + (1 - t) * offset;
     hud.rotation.x = (1 - t) * THREE.Math.DEG2RAD * 90;
-    hud.matrixNeedsUpdate = true;
+    hud.matrixNeedsUpdate = true;    
   },
 
-  play() {
-    for (let i = 0; i < this.hoverableChildren.length; i++) {
-      this.hoverableChildren[i].object3D.addEventListener("hovered", this.onChildHovered);
-    }
-  },
+  // play() {
+  //   for (let i = 0; i < this.hoverableChildren.length; i++) {
+  //     this.hoverableChildren[i].object3D.addEventListener("hovered", this.onChildHovered);
+  //   }
+  // },
 
   pause() {
     this.removeHoverEvents();

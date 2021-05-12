@@ -12,8 +12,7 @@
     <link rel="manifest" href="/manifest.webmanifest">
     <!-- iOS (for "Add to Homescreen") -->
     <meta name="mobile-web-app-capable" content="yes">
-    <title>Room | App by Company</title>
-    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <title>Room | Virgils</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet"> 
     <!-- Google Analytics -->
     <!-- NOTE GA tracking is disabled by default. You'll need to set the GA_TRACKING_ID build variable to enable it. -->
@@ -36,7 +35,7 @@
             right: 0;
             bottom: 0;
             top: 0;
-            background: var(--loading-screen-background, radial-gradient(50% 50% at 50% 50%, #FFFFFF 0%, #EEEEEE 100%));
+            background: var(--loading-screen-background);
         }
 
         #preload-overlay.loaded {
@@ -186,9 +185,9 @@
                                         <a-entity mixin="rounded-button" is-remote-hover-target tags="singleActionButton: true;" position="0.45 0.675 0.35" class="avatar-volume-up-button">
                                             <a-entity text="value: +; anchor: center; align: center; color: #ccc; letterSpacing: 4; width: 2.5;" text-raycast-hack position="0 0 0.001" scale="0.85 0.85 0.85"></a-entity>
                                         </a-entity>
-                                        <a-entity is-remote-hover-target tags="singleActionButton:true;" mixin="rounded-text-button" block-button position="0 0 .35">
+                                        <!-- <a-entity is-remote-hover-target tags="singleActionButton:true;" mixin="rounded-text-button" block-button position="0 0 .35">
                                             <a-entity text="value:Hide; width:2.5; align:center;" text-raycast-hack position="0 0 0.001"></a-entity>
-                                        </a-entity>
+                                        </a-entity> -->
                                         <a-entity is-remote-hover-target tags="singleActionButton:true;" mixin="rounded-text-button" visible-if-permitted="mute_users" mute-button position="0 -0.3 .35" scale="0.8 0.8 0.8">
                                             <a-entity text="value:Mute; width:2.5; align:center;" text-raycast-hack visible-if-permitted="mute_users" position="0 0 0.001"></a-entity>
                                         </a-entity>

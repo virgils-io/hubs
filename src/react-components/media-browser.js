@@ -65,9 +65,9 @@ const DEFAULT_FACETS = {
     { text: "Transport", params: { filter: "transport" } }
   ],
   avatars: [
-    { text: "Featured", params: { filter: "featured" } },
-    { text: "My Avatars", params: { filter: "my-avatars" } },
-    { text: "Newest", params: { filter: "" } }
+    { text: "Featured", params: { filter: "featured" } }
+    // { text: "My Avatars", params: { filter: "my-avatars" } },
+    // { text: "Newest", params: { filter: "" } }
   ],
   favorites: [],
   scenes: [{ text: "Featured", params: { filter: "featured" } }, { text: "My Scenes", params: { filter: "my-scenes" } }]
@@ -370,10 +370,11 @@ class MediaBrowserContainer extends Component {
     const urlSource = this.getUrlSource(searchParams);
     const isSceneApiType = urlSource === "scenes";
     const isFavorites = urlSource === "favorites";
-    const showCustomOption =
-      !isFavorites && (!isSceneApiType || this.props.hubChannel.canOrWillIfCreator("update_hub"));
+    const showCustomOption = false
+      // !isFavorites && (!isSceneApiType || this.props.hubChannel.canOrWillIfCreator("update_hub"));
     const entries = (this.state.result && this.state.result.entries) || [];
-    const hideSearch = urlSource === "favorites";
+    // const hideSearch = urlSource === "favorites";
+    const hideSearch = true;
     const showEmptyStringOnNoResult = urlSource !== "avatars" && urlSource !== "scenes";
 
     const facets = this.state.facets && this.state.facets.length > 0 ? this.state.facets : undefined;
@@ -468,7 +469,7 @@ class MediaBrowserContainer extends Component {
           }
         }}
         onClearSearch={() => this.handleQueryUpdated("", true)}
-        mediaSources={urlSource === "favorites" ? undefined : SOURCES}
+        mediaSources={urlSource === "favorites" ? undefined : SOURCES} // SOURCES is an array defined in src/storage/media-seach-store.js; Paired down the list to just avatars.
         selectedSource={urlSource}
         onSelectSource={this.handleSourceClicked}
         activeFilter={activeFilter}
@@ -503,7 +504,7 @@ class MediaBrowserContainer extends Component {
         entries.length > 0 ||
         !showEmptyStringOnNoResult ? (
           <>
-            {urlSource === "avatars" && (
+            {urlSource === "avatars" && this.props.hubChannel.signedIn && (
               <CreateTile
                 type="avatar"
                 onClick={this.onCreateAvatar}
@@ -511,7 +512,7 @@ class MediaBrowserContainer extends Component {
               />
             )}
             {urlSource === "scenes" &&
-              configs.feature("enable_spoke") && (
+              configs.feature("enable_spoke") && this.props.hubChannel.signedIn && (
                 <CreateTile
                   as="a"
                   href="/spoke/new"

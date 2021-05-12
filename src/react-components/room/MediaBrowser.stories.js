@@ -251,6 +251,7 @@ const gif = {
 };
 
 const mediaSources = ["poly", "sketchfab", "videos", "scenes", "avatars", "gifs", "images"];
+// const mediaSources = ["avatars", "scenes"];
 
 export const Favorites = () => (
   <MediaBrowser selectedSource={"favorites"}>

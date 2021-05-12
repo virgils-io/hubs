@@ -49,7 +49,7 @@ export function RoomEntryModal({
             <Button preset="accent4" onClick={onJoinRoom}>
               <EnterIcon />
               <span>
-                <FormattedMessage id="room-entry-modal.join-room-button" defaultMessage="Join Room" />
+                <FormattedMessage id="room-entry-modal.join-room-button" defaultMessage="Enter Virgils" />
               </span>
             </Button>
           )}
@@ -76,7 +76,7 @@ export function RoomEntryModal({
                 <Button preset="transparent" className={styleUtils.showLg} onClick={onOptions}>
                   <SettingsIcon />
                   <span>
-                    <FormattedMessage id="room-entry-modal.options-button" defaultMessage="Options" />
+                    <FormattedMessage id="room-entry-modal.options-button" defaultMessage="Room Settings" />
                   </span>
                 </Button>
               </>
